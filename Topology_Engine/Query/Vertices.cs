@@ -58,7 +58,7 @@ namespace BH.Engine.Topology
 
         public static List<Vertex> Vertices(this Wire wire)
         {
-            return wire.Vertices();
+            return wire.Vertices(true);
         }
 
         /***************************************************/
