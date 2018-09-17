@@ -14,30 +14,16 @@ namespace BH.Engine.Topology
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static List<Cell> Cells(this CellComplex cellComplex)
+        public static List<CellComplex> CellComplexes(this Cell cell, Topologic.Topology parentTopology)
         {
-            return cellComplex.Cells();
+            return cell.CellComplexes(parentTopology);
         }
 
         /***************************************************/
 
-        public static List<Cell> Cells(this Cluster cluster)
+        public static List<CellComplex> CellComplexes(this Cluster cluster, Topologic.Topology parentTopology)
         {
-            return cluster.Cells();
-        }
-
-        /***************************************************/
-
-        public static List<Cell> Cells(this Topologic.Face face)
-        {
-            return face.Cells();
-        }
-
-        /***************************************************/
-
-        public static List<Cell> Cells(this Shell shell)
-        {
-            return shell.Cells();
+            return cluster.CellComplexes(parentTopology);
         }
 
         /***************************************************/

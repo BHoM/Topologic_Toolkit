@@ -16,18 +16,11 @@ namespace BH.Engine.Topology
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static List<Cell> CreateSpaces(IEnumerable<BuildingElement> buildingElements)
+        public static Topologic.Topology XOR(this Topologic.Topology topology, Topologic.Topology otherTopology)
         {
-            //TODO: Create spaces from the cells
-            CellComplex complex = CellComplex.ByFaces(buildingElements.Select(x => x.ToFace()));
-
-            //complex = complex.SelfMerge() as CellComplex;
-
-            return complex.Cells();
+            return topology.XOR(otherTopology);
         }
 
-
         /***************************************************/
-
     }
 }

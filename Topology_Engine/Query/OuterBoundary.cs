@@ -1,34 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using BH.oM.Geometry;
 using Topologic;
-using BH.Engine.Geometry;
 
 namespace BH.Engine.Topology
 {
-    public static partial class Create
+    public static partial class Query
     {
         /***************************************************/
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static Wire Wire(IEnumerable<Edge> edges)
+        public static Shell OuterBoundary(this Cell cell)
         {
-            return Topologic.Wire.ByEdges(edges);
+            return cell.OuterBoundary();
         }
 
         /***************************************************/
 
-        public static Wire Wire(IEnumerable<Line> lines)
+        public static Cell OuterBoundary(this CellComplex cellComplex)
         {
-            return Topologic.Wire.ByEdges(lines.Select(x => Create.Edge(x)));
+            return cellComplex.OuterBoundary();
         }
 
         /***************************************************/
 
-        public static Wire Wire(Polyline polyLine)
+        public static Wire OuterBoundary(this Topologic.Face face)
         {
-            return Topologic.Wire.ByEdges(polyLine.SubParts().Select(x => Create.Edge(x)));
+            return face.OuterBoundary();
         }
 
         /***************************************************/

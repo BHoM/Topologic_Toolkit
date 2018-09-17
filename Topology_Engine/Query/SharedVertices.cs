@@ -14,30 +14,23 @@ namespace BH.Engine.Topology
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static List<Cell> Cells(this CellComplex cellComplex)
+        public static List<Vertex> SharedVertices(this Cell cell, Cell otherCell)
         {
-            return cellComplex.Cells();
+            return cell.SharedVertices(otherCell);
         }
 
         /***************************************************/
 
-        public static List<Cell> Cells(this Cluster cluster)
+        public static Vertex SharedVertex(this Edge edge, Edge otherEdge)
         {
-            return cluster.Cells();
+            return edge.SharedVertex(otherEdge);
         }
 
         /***************************************************/
 
-        public static List<Cell> Cells(this Topologic.Face face)
+        public static List<Vertex> SharedVertices(this Topologic.Face face, Topologic.Face otherFace)
         {
-            return face.Cells();
-        }
-
-        /***************************************************/
-
-        public static List<Cell> Cells(this Shell shell)
-        {
-            return shell.Cells();
+            return face.SharedVertices(otherFace);
         }
 
         /***************************************************/

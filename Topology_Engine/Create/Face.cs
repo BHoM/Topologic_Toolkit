@@ -21,14 +21,14 @@ namespace BH.Engine.Topology
 
         public static Topologic.Face Face(Wire wire)
         {
-            return Topologic.Face.ByWire(wire);
+            return Topologic.Face.ByExternalBoundary(wire);
         }
 
         /***************************************************/
 
-        public static Topologic.Face Face(IEnumerable<IEnumerable<Vertex>> vertecies)
+        public static Topologic.Face Face(IEnumerable<IEnumerable<Vertex>> vertices)
         {
-            return Topologic.Face.ByVertices(vertecies);
+            return Topologic.Face.ByVertices(vertices);
         }
 
         /***************************************************/
@@ -38,7 +38,32 @@ namespace BH.Engine.Topology
             if (!polyLine.IsClosed())
                 return null;
 
-            return Topologic.Face.ByWire(Create.Wire(polyLine));
+            return Topologic.Face.ByExternalBoundary(Create.Wire(polyLine));
+        }
+
+        /***************************************************/
+
+        public static Topologic.Face Face(Wire outerWire, IEnumerable<Wire> innerWires)
+        {
+            return Topologic.Face.ByExternalInternalBoundaries(outerWire, innerWires);
+        }
+
+        /***************************************************/
+
+        public static Topologic.Face Face(Polyline outerPolyline, IEnumerable<Polyline> innerPolylines)
+        {
+            if (!outerPolyline.IsClosed())
+                return null;
+
+            List<Wire> innerWires = new List<Topologic.Wire>();
+            foreach(Polyline innerPolyline in innerPolylines)
+            {
+                if (!innerPolyline.IsClosed())
+                    return null;
+                innerWires.Add(Create.Wire(innerPolyline));
+            }
+
+            return Topologic.Face.ByExternalInternalBoundaries(Create.Wire(outerPolyline), innerWires);
         }
 
         /***************************************************/

@@ -12,23 +12,23 @@ namespace BH.Engine.Topology
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static Wire Wire(IEnumerable<Edge> edges)
+        public static Shell Shell(IEnumerable<Vertex> vertices, IEnumerable<IEnumerable<int>> faceIndices)
         {
-            return Topologic.Wire.ByEdges(edges);
+            return Topologic.Shell.ByVerticesFaceIndices(vertices, faceIndices);
         }
 
         /***************************************************/
 
-        public static Wire Wire(IEnumerable<Line> lines)
+        public static Shell Shell(IEnumerable<Wire> wires)
         {
-            return Topologic.Wire.ByEdges(lines.Select(x => Create.Edge(x)));
+            return Topologic.Shell.ByLoft(wires);
         }
 
         /***************************************************/
 
-        public static Wire Wire(Polyline polyLine)
+        public static Shell Shell(IEnumerable<Topologic.Face> faces)
         {
-            return Topologic.Wire.ByEdges(polyLine.SubParts().Select(x => Create.Edge(x)));
+            return Topologic.Shell.ByFaces(faces);
         }
 
         /***************************************************/

@@ -10,24 +10,17 @@ using BH.Engine.Geometry;
 
 namespace BH.Engine.Topology
 {
-    public static partial class Compute
+    public static partial class Convert
     {
         /***************************************************/
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static List<Cell> CreateSpaces(IEnumerable<BuildingElement> buildingElements)
+        public static Point ToBHoMPoint(this Vertex vertex)
         {
-            //TODO: Create spaces from the cells
-            CellComplex complex = CellComplex.ByFaces(buildingElements.Select(x => x.ToFace()));
-
-            //complex = complex.SelfMerge() as CellComplex;
-
-            return complex.Cells();
+            return new Point { X = vertex.X, Y = vertex.Y, Z = vertex.Z };
         }
 
-
         /***************************************************/
-
     }
 }

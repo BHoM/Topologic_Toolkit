@@ -1,27 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using BH.oM.Geometry;
-using BH.Engine.Geometry;
 using Topologic;
 
 namespace BH.Engine.Topology
 {
-    public static partial class Create
+    public static partial class Query
     {
         /***************************************************/
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static Topologic.CellComplex CellComplex(IEnumerable<Topologic.Face> faces)
+        public static List<Edge> SharedEdges(this Cell cell, Cell otherCell)
         {
-            return Topologic.CellComplex.ByFaces(faces);
+            return cell.SharedEdges(otherCell);
         }
 
         /***************************************************/
 
-        public static Topologic.CellComplex CellComplex(IEnumerable<Topologic.Cell> cells)
+        public static List<Edge> SharedEdges(this Topologic.Face face, Topologic.Face otherFace)
         {
-            return Topologic.CellComplex.ByCells(cells);
+            return face.SharedEdges(otherFace);
         }
 
         /***************************************************/

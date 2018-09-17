@@ -12,16 +12,9 @@ namespace BH.Engine.Topology
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static Topologic.CellComplex CellComplex(IEnumerable<Topologic.Face> faces)
+        public static Topologic.Cluster Cluster(IEnumerable<Topologic.Topology> topologies)
         {
-            return Topologic.CellComplex.ByFaces(faces);
-        }
-
-        /***************************************************/
-
-        public static Topologic.CellComplex CellComplex(IEnumerable<Topologic.Cell> cells)
-        {
-            return Topologic.CellComplex.ByCells(cells);
+            return Topologic.Cluster.ByTopologies(topologies);
         }
 
         /***************************************************/
