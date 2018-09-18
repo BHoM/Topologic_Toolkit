@@ -64,6 +64,7 @@
     <Compile Include="Create\Cell.cs" />
     <Compile Include="Create\CellComplex.cs" />
     <Compile Include="Create\Cluster.cs" />
+    <Compile Include="Create\DualGraph.cs" />
     <Compile Include="Create\Edge.cs" />
     <Compile Include="Create\Face.cs" />
     <Compile Include="Create\Shell.cs" />
