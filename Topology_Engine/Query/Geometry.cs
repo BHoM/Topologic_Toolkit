@@ -37,7 +37,7 @@ namespace BH.Engine.Topology
 
         public static List<Line> Geometry(this Topologic.Face face)
         {
-            return face.Edges().Select(x => x.Geometry()).ToList();
+            return face.Wires().SelectMany(x => x.Geometry()).ToList();
         }
 
         /***************************************************/
@@ -65,7 +65,7 @@ namespace BH.Engine.Topology
 
         public static List<Line> Geometry(this Cluster cluster)
         {
-            return cluster.Edges().Select(x => x.Geometry()).ToList();
+            throw new NotImplementedException();
         }
 
         /***************************************************/
