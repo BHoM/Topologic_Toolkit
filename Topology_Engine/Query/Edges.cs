@@ -58,14 +58,14 @@ namespace BH.Engine.Topology
 
         public static List<Edge> Edges(this Wire wire)
         {
-            return wire.Edges();
+            return wire.Edges(false);
         }
 
         /***************************************************/
 
         public static List<Edge> Edges(this DualGraph dualGraph)
         {
-            return dualGraph.Edges();
+            return dualGraph.Edges(false);
         }
 
         /***************************************************/

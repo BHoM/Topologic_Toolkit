@@ -58,14 +58,14 @@ namespace BH.Engine.Topology
 
         public static List<Vertex> Vertices(this Wire wire)
         {
-            return wire.Vertices(true);
+            return wire.Vertices(false);
         }
 
         /***************************************************/
 
         public static List<Vertex> Vertices(this DualGraph dualGraph)
         {
-            return dualGraph.Vertices(true);
+            return dualGraph.Vertices(false);
         }
 
         /***************************************************/
