@@ -28,9 +28,51 @@ namespace BH.Engine.Topology
 
         /***************************************************/
 
+        public static List<Line> Geometry(this Wire wire)
+        {
+            return wire.Edges().Select(e => e.Geometry()).ToList();
+        }
+
+        /***************************************************/
+
+        public static List<Line> Geometry(this Topologic.Face face)
+        {
+            return face.Edges().Select(x => x.Geometry()).ToList();
+        }
+
+        /***************************************************/
+
+        public static List<Line> Geometry(this Shell shell)
+        {
+            return shell.Faces().SelectMany(x => x.Geometry()).ToList();
+        }
+
+        /***************************************************/
+
         public static List<Line> Geometry(this Cell cell)
         {
-            return cell.Edges().Select(x => x.Geometry()).ToList();
+            return cell.Shells().SelectMany(x => x.Geometry()).ToList();
+        }
+
+        /***************************************************/
+
+        public static List<Line> Geometry(this CellComplex cellComplex)
+        {
+            return cellComplex.Cells().SelectMany(x => x.Geometry()).ToList();
+        }
+
+        /***************************************************/
+
+        public static List<Line> Geometry(this Cluster cluster)
+        {
+            return cluster.Edges().Select(x => x.Geometry()).ToList();
+        }
+
+        /***************************************************/
+
+        public static List<Line> Geometry(this DualGraph dualGraph)
+        {
+            return dualGraph.Edges().Select(x => x.Geometry()).ToList();
         }
 
         /***************************************************/

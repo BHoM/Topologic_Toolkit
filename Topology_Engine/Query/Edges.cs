@@ -62,5 +62,12 @@ namespace BH.Engine.Topology
         }
 
         /***************************************************/
+
+        public static List<Edge> Edges(this DualGraph dualGraph)
+        {
+            return dualGraph.Edges();
+        }
+
+        /***************************************************/
     }
 }

@@ -62,5 +62,12 @@ namespace BH.Engine.Topology
         }
 
         /***************************************************/
+
+        public static List<Vertex> Vertices(this DualGraph dualGraph)
+        {
+            return dualGraph.Vertices(true);
+        }
+
+        /***************************************************/
     }
 }
