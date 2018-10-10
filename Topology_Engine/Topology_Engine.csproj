@@ -37,6 +37,13 @@
     <Reference Include="Geometry_Engine">
       <HintPath>..\..\BHoM_Engine\Build\Geometry_Engine.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.7.0\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serialiser_Engine">
+      <HintPath>..\..\BHoM_Engine\Build\Serialiser_Engine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -81,6 +88,7 @@
     <Compile Include="Query\AdjacentFaces.cs" />
     <Compile Include="Query\Analyze.cs" />
     <Compile Include="Query\Area.cs" />
+    <Compile Include="Query\BuildingElement.cs" />
     <Compile Include="Query\CellComplexes.cs" />
     <Compile Include="Query\Cells.cs" />
     <Compile Include="Query\CenterOfMass.cs" />
@@ -93,6 +101,7 @@
     <Compile Include="Query\InnerBoundaries.cs" />
     <Compile Include="Query\IsClosed.cs" />
     <Compile Include="Query\IsSame.cs" />
+    <Compile Include="Query\MatchVertices.cs" />
     <Compile Include="Query\NonManifoldFaces.cs" />
     <Compile Include="Query\OuterBoundary.cs" />
     <Compile Include="Query\SharedEdges.cs" />
@@ -104,7 +113,9 @@
     <Compile Include="Query\Volume.cs" />
     <Compile Include="Query\Wires.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
