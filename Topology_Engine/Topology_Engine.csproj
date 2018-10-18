@@ -34,6 +34,9 @@
     <Reference Include="BHoM">
       <HintPath>..\..\BHoM\Build\BHoM.dll</HintPath>
     </Reference>
+    <Reference Include="Environment_Engine">
+      <HintPath>..\..\BHoM_Engine\Build\Environment_Engine.dll</HintPath>
+    </Reference>
     <Reference Include="Geometry_Engine">
       <HintPath>..\..\BHoM_Engine\Build\Geometry_Engine.dll</HintPath>
     </Reference>
@@ -101,6 +104,7 @@
     <Compile Include="Query\InnerBoundaries.cs" />
     <Compile Include="Query\IsClosed.cs" />
     <Compile Include="Query\IsSame.cs" />
+    <Compile Include="Query\MatchSpaces.cs" />
     <Compile Include="Query\MatchVertices.cs" />
     <Compile Include="Query\NonManifoldFaces.cs" />
     <Compile Include="Query\OuterBoundary.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="Query\SharedTopologies.cs" />
     <Compile Include="Query\SharedVertices.cs" />
     <Compile Include="Query\Shells.cs" />
+    <Compile Include="Query\StripOpenings.cs" />
     <Compile Include="Query\Vertices.cs" />
     <Compile Include="Query\Volume.cs" />
     <Compile Include="Query\Wires.cs" />

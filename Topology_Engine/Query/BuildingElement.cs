@@ -52,5 +52,21 @@ namespace BH.Engine.Topology
         }
 
         /***************************************************/
+
+        public static List<BuildingElement> UnusedBuildingElements(this List<BuildingElement> elements, List<List<BuildingElement>> elementsAsSpaces)
+        {
+            //This method obtains the building elements which aren't used to make up any spaces defined by Topologic
+            List<BuildingElement> unusedElements = new List<BuildingElement>();
+
+            foreach(BuildingElement be in elements)
+            {
+                List<List<BuildingElement>> spaces = elementsAsSpaces.Where(x => x.Where(y => y.BHoM_Guid == be.BHoM_Guid).ToList().Count > 0).ToList();
+
+                if (spaces.Count == 0)
+                    unusedElements.Add(be);
+            }
+
+            return unusedElements;
+        }
     }
 }
