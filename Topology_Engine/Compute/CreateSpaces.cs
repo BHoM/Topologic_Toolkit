@@ -8,6 +8,8 @@ using BH.oM.Geometry;
 using Topologic;
 using BH.Engine.Geometry;
 
+using BH.Engine.Environment;
+
 namespace BH.Engine.Topology
 {
     public static partial class Compute
@@ -25,8 +27,5 @@ namespace BH.Engine.Topology
 
             return complex.Cells();
         }
-
-        /***************************************************/
-
     }
 }
