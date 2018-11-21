@@ -104,7 +104,6 @@
     <Compile Include="Query\InnerBoundaries.cs" />
     <Compile Include="Query\IsClosed.cs" />
     <Compile Include="Query\IsSame.cs" />
-    <Compile Include="Query\MatchSpaces.cs" />
     <Compile Include="Query\MatchVertices.cs" />
     <Compile Include="Query\NonManifoldFaces.cs" />
     <Compile Include="Query\OuterBoundary.cs" />
