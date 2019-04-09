@@ -1,0 +1,98 @@
+;NSIS Modern User Interface
+;Basic Example Script
+;Written by Joost Verburg
+
+;--------------------------------
+;Include Modern UI
+
+  !include "MUI2.nsh"
+  !include "Sections.nsh"
+
+;--------------------------------
+;General
+  !define /date MyTIMESTAMP "%Y-%m-%d-%H-%M-%S"
+
+  ;Name and file
+  Name "Topologic"
+  OutFile "TopologicBHoMInstaller.exe"
+
+  ;Default installation folder
+  InstallDir "$APPDATA\Grasshopper\Libraries\BHoM"
+  
+  ;Request application privileges for Windows Vista
+  RequestExecutionLevel admin 
+
+;--------------------------------
+;Interface Settings
+
+  !define MUI_ABORTWARNING
+
+;--------------------------------
+;Pages
+  ;!define MUI_WELCOMEPAGE_TITLE "Test"
+  !define MUI_WELCOMEPAGE_TEXT "This Setup will guide you through the installation of TopologicBHoM.$\r$\n$\r$\nNOTE: Please close all Rhino instances before proceeding with the next installation steps.$\r$\n$\r$\nClick Next to continue."
+  
+  !define MUI_ICON "Topologic-Logo-ColourOnWhite.ico"
+  !define MUI_HEADERIMAGE
+  !define MUI_HEADERIMAGE_BITMAP "TopoLogic-Logo.bmp"
+  !define MUI_HEADERIMAGE_UNBITMAP "TopoLogic-Logo.bmp"
+  !define MUI_HEADERIMAGE_RIGHT
+  
+  !insertmacro MUI_PAGE_WELCOME
+  !insertmacro MUI_PAGE_LICENSE "TopologicLicense.rtf"
+  !insertmacro MUI_PAGE_COMPONENTS
+  !insertmacro MUI_PAGE_DIRECTORY
+  !insertmacro MUI_PAGE_INSTFILES
+  
+  !insertmacro MUI_UNPAGE_CONFIRM
+  !insertmacro MUI_UNPAGE_INSTFILES
+  
+;--------------------------------
+;Languages
+ 
+  !insertmacro MUI_LANGUAGE "English"
+
+;--------------------------------
+;Installer Sections
+ 
+Section "TopologicBHoM" TopologicBHoM
+
+  SetOutPath "$INSTDIR"
+  
+  File "C:\Users\Nicholas Wardhana\AppData\Roaming\Grasshopper\Libraries\BHoM\*"
+  
+  ;ADD YOUR OWN FILES HERE...
+  
+SectionEnd
+
+Section #hidden, run after all other sections
+  WriteUninstaller "$INSTDIR\Uninstall.exe"
+SectionEnd
+
+Function .onInit
+  IntOp $R0 ${SF_RO} | ${SF_SELECTED}
+  SectionSetFlags ${TopologicBHoM} $R0
+FunctionEnd
+
+;--------------------------------
+;Descriptions
+
+  ;Language strings
+  LangString DESC_TopologicBHoM ${LANG_ENGLISH} "Installs the Topologic BHoM package."
+
+  ;Assign language strings to sections
+  !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+    !insertmacro MUI_DESCRIPTION_TEXT ${TopologicBHoM} $(TopologicBHoM)
+  !insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+;--------------------------------
+;Uninstaller Section
+
+Section "Uninstall"
+
+  ;ADD YOUR OWN FILES HERE...
+  Delete "$INSTDIR\*"
+  Delete "$INSTDIR\Uninstall.exe"
+  RMDir "$INSTDIR"
+
+SectionEnd
