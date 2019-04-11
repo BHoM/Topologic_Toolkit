@@ -57,12 +57,48 @@
  
 Section "TopologicBHoM" TopologicBHoM
 
-  SetOutPath "$INSTDIR"
+  SetOutPath "$INSTDIR"	
   
   File "C:\Users\Nicholas Wardhana\AppData\Roaming\Grasshopper\Libraries\BHoM\*"
   
   ;ADD YOUR OWN FILES HERE...
+  ;Check if 
+  ClearErrors
+  IfFileExists "$APPDATA\BHoM\Assemblies\BHoM.dll" +8 0
+  MessageBox MB_YESNO "No BHoM installation is found. Press Yes to install it, otherwise press No to skip this process (you will need to download and install it separately)." IDYES InstallBHoMYes IDNO InstallBHoMNo
+  InstallBHoMYes:
+	File BHoM_v2.2.beta.0.exe
+    ExecWait "$INSTDIR\BHoM_v2.2.beta.0.exe" $0
+	${If} $0 <> 0
+      MessageBox MB_OK "Failed to install BHoM. Please install it manually."
+    ${EndIf}
+  InstallBHoMNo:
+  Delete "$INSTDIR\BHoM_v2.2.beta.0.exe"
   
+  ClearErrors
+  SetRegView 64
+  ReadRegDWORD $0 HKLM "SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" "Installed"
+  ${If} ${Errors}
+    ;Install Redistributable
+	Call InstallVCRedistributable
+  ${Else}
+    ${If} $0 == ""
+      ;Install Redistributable, although this should not happen.
+	  Call InstallVCRedistributable
+    ${Else} ; Compare version
+	  ReadRegDWORD $1 HKLM "SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" "Major"
+	  ${If} $1 < 14
+	    ;Install Redistributable
+	    Call InstallVCRedistributable
+	  ${Else}
+	    ReadRegDWORD $2 HKLM "SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" "Minor"
+		${If} $2 < 14
+	      ;Install Redistributable
+	      Call InstallVCRedistributable
+	    ${EndIf}
+	  ${EndIf}
+    ${EndIf}
+  ${EndIf}
 SectionEnd
 
 Section #hidden, run after all other sections
@@ -74,6 +110,17 @@ Function .onInit
   SectionSetFlags ${TopologicBHoM} $R0
 FunctionEnd
 
+Function InstallVCRedistributable
+  MessageBox MB_YESNO "No Visual Studio 2017 Redistributale (x64) installation is found. Press Yes to install it, otherwise press No to skip this process (you will need to download and install it separately)." IDYES InstallVCRedistributableYes IDNO InstallVCRedistributableFinish
+  InstallVCRedistributableYes:
+	File vc_redist.x64.exe
+    ExecWait "$INSTDIR\vc_redist.x64.exe" $0
+    ${If} $0 <> 0
+      MessageBox MB_OK "Failed to install Visual Studio 2017 Redistributable (x64). Please install the redistributable manually."
+    ${EndIf}
+  InstallVCRedistributableFinish:
+  Delete $INSTDIR\vc_redist.x64.exe ;bug: if the installation halts (e.g. not restarted), this file is not deleted
+FunctionEnd
 ;--------------------------------
 ;Descriptions
 
@@ -82,7 +129,7 @@ FunctionEnd
 
   ;Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${TopologicBHoM} $(TopologicBHoM)
+    !insertmacro MUI_DESCRIPTION_TEXT ${TopologicBHoM} $(DESC_TopologicBHoM)
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;--------------------------------
