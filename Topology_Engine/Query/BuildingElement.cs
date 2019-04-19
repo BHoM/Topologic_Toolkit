@@ -16,28 +16,28 @@ namespace BH.Engine.Topology
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static List<List<BuildingElement>> BuildingElements(List<Cell> cells, List<BuildingElement> ele)
+        public static List<List<Panel>> Panels(List<Cell> cells, List<Panel> ele)
         {
             List<MongoDB.Bson.BsonDocument> bd = new List<MongoDB.Bson.BsonDocument>();
-            foreach (BuildingElement e in ele)
+            foreach (Panel e in ele)
                 bd.Add(BH.Engine.Serialiser.Convert.ToBson(e));
 
-            List<BuildingElement> elements = new List<BuildingElement>();
+            List<Panel> elements = new List<Panel>();
             foreach (MongoDB.Bson.BsonDocument b in bd)
-                elements.Add((BuildingElement)BH.Engine.Serialiser.Convert.FromBson(b));
+                elements.Add((Panel)BH.Engine.Serialiser.Convert.FromBson(b));
 
-            List<List<BuildingElement>> rtn = new List<List<BuildingElement>>();
+            List<List<Panel>> rtn = new List<List<Panel>>();
 
             foreach(Cell c in cells)
             {
-                rtn.Add(new List<BuildingElement>()); //Add a new list for the building elements which make up this cell
+                rtn.Add(new List<Panel>()); //Add a new list for the building elements which make up this cell
 
                 List<Topologic.Face> f = c.Faces();
                 foreach(Topologic.Face face in f)
                 {
                     List<Vertex> v = face.Vertices();
 
-                    foreach (BuildingElement be in elements)
+                    foreach (Panel be in elements)
                     {
                         if (be.MatchVertices(v))
                         {
@@ -53,14 +53,14 @@ namespace BH.Engine.Topology
 
         /***************************************************/
 
-        public static List<BuildingElement> UnusedBuildingElements(this List<BuildingElement> elements, List<List<BuildingElement>> elementsAsSpaces)
+        public static List<Panel> UnusedPanels(this List<Panel> elements, List<List<Panel>> elementsAsSpaces)
         {
             //This method obtains the building elements which aren't used to make up any spaces defined by Topologic
-            List<BuildingElement> unusedElements = new List<BuildingElement>();
+            List<Panel> unusedElements = new List<Panel>();
 
-            foreach(BuildingElement be in elements)
+            foreach(Panel be in elements)
             {
-                List<List<BuildingElement>> spaces = elementsAsSpaces.Where(x => x.Where(y => y.BHoM_Guid == be.BHoM_Guid).ToList().Count > 0).ToList();
+                List<List<Panel>> spaces = elementsAsSpaces.Where(x => x.Where(y => y.BHoM_Guid == be.BHoM_Guid).ToList().Count > 0).ToList();
 
                 if (spaces.Count == 0)
                     unusedElements.Add(be);

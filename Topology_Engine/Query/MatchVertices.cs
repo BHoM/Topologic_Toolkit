@@ -8,6 +8,7 @@ using Topologic;
 
 using BH.oM.Environment.Elements;
 using BH.Engine.Geometry;
+using BH.Engine.Environment;
 
 namespace BH.Engine.Topology
 {
@@ -17,14 +18,14 @@ namespace BH.Engine.Topology
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static bool MatchVertices(this BuildingElement ele, List<Vertex> vertices)
+        public static bool MatchVertices(this Panel ele, List<Vertex> vertices)
         {
             if (ele == null) return false;
 
             MongoDB.Bson.BsonDocument bd = BH.Engine.Serialiser.Convert.ToBson(ele);
-            BuildingElement element = (BuildingElement)BH.Engine.Serialiser.Convert.FromBson(bd);
+            Panel element = (Panel)BH.Engine.Serialiser.Convert.FromBson(bd);
 
-            List<Point> elementVertices = element.PanelCurve.IControlPoints();
+            List<Point> elementVertices = element.ToPolyline().IControlPoints();
             if (elementVertices.Count == 0) return false;
             elementVertices.RemoveAt(elementVertices.Count - 1); //Remove the last point because it is a repeat of the first point
 

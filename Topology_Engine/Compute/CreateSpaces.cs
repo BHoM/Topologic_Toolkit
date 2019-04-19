@@ -18,10 +18,10 @@ namespace BH.Engine.Topology
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static List<Cell> CreateSpaces(IEnumerable<BuildingElement> buildingElements)
+        public static List<Cell> CreateSpaces(IEnumerable<Panel> panels)
         {
             //TODO: Create spaces from the cells
-            CellComplex complex = CellComplex.ByFaces(buildingElements.Select(x => x.ToFace()));
+            CellComplex complex = CellComplex.ByFaces(panels.Select(x => x.ToFace()));
 
             //complex = complex.SelfMerge() as CellComplex;
 
