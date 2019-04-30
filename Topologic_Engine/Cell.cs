@@ -14,10 +14,10 @@ namespace BH.Topologic.Core.Cell
     {
         internal static IGeometry BasicGeometry(this global::Topologic.Cell cell)
         {
-            return PolySurface(cell);
+            return BoundaryRepresentation(cell);
         }
 
-        internal static PolySurface PolySurface(this global::Topologic.Cell cell)
+        internal static BoundaryRepresentation BoundaryRepresentation(this global::Topologic.Cell cell)
         {
             List<global::Topologic.Face> faces = cell.Faces;
             List<ISurface> bhomSurfaces = new List<ISurface>();
@@ -25,7 +25,7 @@ namespace BH.Topologic.Core.Cell
             {
                 bhomSurfaces.Add(Face.Convert.PlanarSurface(face));
             }
-            return new PolySurface { Surfaces = bhomSurfaces };
+            return new BoundaryRepresentation(bhomSurfaces);
         }
     }
 

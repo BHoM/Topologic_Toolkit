@@ -10,6 +10,25 @@ using BH.oM.Environment.Elements;
 
 namespace BH.Topologic.Core.Cluster
 {
+    public static partial class Convert
+    {
+        internal static CompositeGeometry BasicGeometry(this global::Topologic.Cluster cluster)
+        {
+            return CompositeGeometry(cluster);
+        }
+
+        internal static CompositeGeometry CompositeGeometry(this global::Topologic.Cluster cluster)
+        {
+            List<global::Topologic.Cell> cells = cluster.Cells;
+            List<IGeometry> bhomSolids = new List<IGeometry>();
+            foreach (global::Topologic.Cell cell in cells)
+            {
+                bhomSolids.Add(Cell.Convert.BoundaryRepresentation(cell));
+            }
+            return new CompositeGeometry { Elements = bhomSolids };
+        }
+    }
+
     public static partial class Query
     {
         public static List<global::Topologic.Shell> Shells(this global::Topologic.Cluster cluster)

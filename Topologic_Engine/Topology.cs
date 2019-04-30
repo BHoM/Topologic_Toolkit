@@ -86,6 +86,12 @@ namespace BH.Topologic.Core.Topology
                 return CellComplex.Convert.BasicGeometry(cellComplex);
             }
 
+            global::Topologic.Cluster cluster = topology as global::Topologic.Cluster;
+            if (cluster != null)
+            {
+                return Cluster.Convert.BasicGeometry(cluster);
+            }
+
             //global::Topologic.Aperture aperture = topology as global::Topologic.Aperture;
             //if (aperture != null)
             //{
