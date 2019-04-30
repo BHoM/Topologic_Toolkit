@@ -12,20 +12,20 @@ namespace BH.Topologic.Core.CellComplex
 {
     public static partial class Convert
     {
-        internal static IGeometry BasicGeometry(this global::Topologic.CellComplex cellComplex)
+        internal static CompositeGeometry BasicGeometry(this global::Topologic.CellComplex cellComplex)
         {
-            return PolySurface(cellComplex);
+            return CompositeGeometry(cellComplex);
         }
 
-        internal static PolySurface PolySurface(this global::Topologic.CellComplex cellComplex)
+        internal static CompositeGeometry CompositeGeometry(this global::Topologic.CellComplex cellComplex)
         {
-            List<global::Topologic.Face> faces = cellComplex.Faces;
-            List<ISurface> bhomSurfaces = new List<ISurface>();
-            foreach (global::Topologic.Face face in faces)
+            List<global::Topologic.Cell> cells = cellComplex.Cells;
+            List<IGeometry> bhomSolids = new List<IGeometry>();
+            foreach (global::Topologic.Cell cell in cells)
             {
-                bhomSurfaces.Add(Face.Convert.PlanarSurface(face));
+                bhomSolids.Add(Cell.Convert.BoundaryRepresentation(cell));
             }
-            return new PolySurface { Surfaces = bhomSurfaces };
+            return new CompositeGeometry { Elements = bhomSolids };
         }
     }
 
