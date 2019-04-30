@@ -60,5 +60,16 @@ namespace BH.Topologic.Core.Cluster
             return global::Topologic.Cluster.ByTopologies(topologies);
         }
 
+        internal static global::Topologic.Cluster ByCompositeGeometry(CompositeGeometry bhomCompositeGeometry, double tolerance)
+        {
+            List<global::Topologic.Topology> topologies = new List<global::Topologic.Topology>();
+            foreach (IGeometry bhomGeometry in bhomCompositeGeometry.Elements)
+            {
+                global::Topologic.Topology topology = Topologic.Core.Topology.Create.ByGeometry(bhomGeometry, tolerance);
+                topologies.Add(topology);
+            }
+
+            return ByTopologies(topologies);
+        }
     }
 }

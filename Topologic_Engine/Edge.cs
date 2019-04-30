@@ -14,6 +14,8 @@ namespace BH.Topologic.Core.Edge
     {
         internal static IGeometry BasicGeometry(this global::Topologic.Edge edge)
         {
+            Object edgeGeometry = edge.BasicGeometry;
+
             // Only line for now
             return Line(edge);
         }
@@ -74,19 +76,84 @@ namespace BH.Topologic.Core.Edge
             return global::Topologic.Edge.ByStartVertexEndVertex(startVertex, endVertex);
         }
 
-        internal static global::Topologic.Edge ByLine(Line line)
+        internal static global::Topologic.Edge ByLine(Line bhomLine)
         {
-            if(line.Infinite)
+            if(bhomLine.Infinite)
             {
                 throw new ArgumentException("Infinite line is not supported.");
             }
 
-            global::Topologic.Vertex startVertex = Vertex.Create.ByPoint(line.Start);
-            global::Topologic.Vertex endVertex = Vertex.Create.ByPoint(line.End);
+            global::Topologic.Vertex startVertex = Vertex.Create.ByPoint(bhomLine.Start);
+            global::Topologic.Vertex endVertex = Vertex.Create.ByPoint(bhomLine.End);
 
             return global::Topologic.Edge.ByStartVertexEndVertex(startVertex, endVertex);
         }
-        
+
+        internal static global::Topologic.Edge ByArc(Arc bhomArc)
+        {
+            throw new NotImplementedException("Arcs are not yet supported.");
+        }
+
+        internal static global::Topologic.Edge ByCircle(Circle bhomCircle)
+        {
+            throw new NotImplementedException("Circles are not yet supported.");
+
+            //Point bhomCentre = bhomCircle.Centre;
+            //Vector bhomNormal = bhomCircle.Normal;
+            //double radius = bhomCircle.Radius;
+            //return global::Topologic.Utilities.EdgeUtility.ByCircle(
+            //    Vertex.Create.ByPoint(bhomCentre),
+            //    radius,
+            //    1.0, 0.0, 0.0,
+            //    bhomNormal.X, bhomNormal.Y, bhomNormal.Z
+            //    );
+        }
+
+        internal static global::Topologic.Edge ByEllipse(Ellipse bhomEllipse)
+        {
+            throw new NotImplementedException("Ellipses are not yet supported.");
+            //Point bhomCentre = bhomEllipse.Centre;
+            //Vector bhomAxis1 = bhomEllipse.Axis1;
+            //Vector bhomAxis2 = bhomEllipse.Axis2;
+            //Vector bhomNormal = BH.Engine.Geometry.Query.CrossProduct(bhomAxis1, bhomAxis2);
+            //double majorRadius = bhomEllipse.Radius1;
+            //double minorRadius = bhomEllipse.Radius2;
+            //if(minorRadius > majorRadius)
+            //{
+            //    double temp = minorRadius;
+            //    minorRadius = majorRadius;
+            //    majorRadius = temp;
+            //}
+
+            //return global::Topologic.Utilities.EdgeUtility.ByEllipse(
+            //    Vertex.Create.ByPoint(bhomCentre),
+            //    majorRadius, minorRadius,
+            //    bhomAxis1.X, bhomAxis1.Y, bhomAxis1.Z,
+            //    bhomNormal.X, bhomNormal.Y, bhomNormal.Z
+            //    );
+        }
+
+        internal static global::Topologic.Edge ByNurbsCurve(NurbsCurve bhomNurbsCurve)
+        {
+            throw new NotImplementedException("NurbsCurves are not yet supported.");
+
+            //List<Point> bhomControlPoints = bhomNurbsCurve.ControlPoints;
+            //List<double> bhomKnots = bhomNurbsCurve.Knots;
+            //List<double> bhomWeights = bhomNurbsCurve.Weights;
+
+            //List<global::Topologic.Vertex> controlPoints = new List<global::Topologic.Vertex>();
+            //foreach(Point bhomControlPoint in bhomControlPoints)
+            //{
+            //    controlPoints.Add(Vertex.Create.ByPoint(bhomControlPoint));
+            //}
+
+            //return global::Topologic.Utilities.EdgeUtility.ByNurbsCurve(
+            //    controlPoints, bhomKnots, bhomWeights, 
+            //    3, // minimum degree
+            //    true, false // OCCT default
+            //    );
+        }
+
         internal static global::Topologic.Edge ByCurve(ICurve bhomCurve)
         {
             // Currently only handle lines
@@ -96,7 +163,31 @@ namespace BH.Topologic.Core.Edge
                 return ByLine(bhomLine);
             }
 
-            throw new NotImplementedException("Curves other than lines are not yet supported.");
+            Arc bhomArc = bhomCurve as Arc;
+            if (bhomArc != null)
+            {
+                return ByArc(bhomArc);
+            }
+
+            Circle bhomCircle = bhomCurve as Circle;
+            if (bhomCircle != null)
+            {
+                return ByCircle(bhomCircle);
+            }
+
+            Ellipse bhomEllipse = bhomCurve as Ellipse;
+            if (bhomEllipse != null)
+            {
+                return ByEllipse(bhomEllipse);
+            }
+
+            NurbsCurve bhomNurbsCurve = bhomCurve as NurbsCurve;
+            if (bhomNurbsCurve != null)
+            {
+                return ByNurbsCurve(bhomNurbsCurve);
+            }
+
+            throw new NotImplementedException("This type of Curve is not supported.");
         }
     }
 }

@@ -100,7 +100,7 @@ namespace BH.Topologic.Core.Cell
 
     public static partial class Create
     {
-        public static global::Topologic.Cell ByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance = 0.001)
+        public static global::Topologic.Cell ByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance)
         {
             return global::Topologic.Cell.ByFaces(faces, tolerance);
         }
@@ -110,5 +110,27 @@ namespace BH.Topologic.Core.Cell
             return global::Topologic.Cell.ByShell(shell);
         }
 
+        internal static global::Topologic.Cell BySolid(ISolid bhomSolid, double tolerance)
+        {
+            BoundaryRepresentation bhomBoundaryRepresentation = bhomSolid as BoundaryRepresentation;
+            if (bhomBoundaryRepresentation != null)
+            {
+                return ByBoundaryRepresentation(bhomBoundaryRepresentation, tolerance);
+            }
+            
+            throw new NotImplementedException("This type of Solid is not yet supported.");
+        }
+
+        internal static global::Topologic.Cell ByBoundaryRepresentation(BoundaryRepresentation bhomBoundaryRepresentation, double tolerance)
+        {
+            List<global::Topologic.Face> faces = new List<global::Topologic.Face>();
+            foreach (ISurface bhomSurface in bhomBoundaryRepresentation.Surfaces)
+            {
+                global::Topologic.Face face = Topologic.Core.Face.Create.BySurface(bhomSurface);
+                faces.Add(face);
+            }
+
+            return global::Topologic.Cell.ByFaces(faces, tolerance);
+        }
     }
 }
