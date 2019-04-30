@@ -22,9 +22,20 @@ namespace BH.Topologic.Core.Wire
             return global::Topologic.Wire.ByEdges(lines.Select(x => BH.Topologic.Core.Edge.Create.ByLine(x)));
         }
 
-        internal static global::Topologic.Wire ByPolyline(Polyline polyLine)
+        internal static global::Topologic.Wire ByPolyLine(Polyline polyLine)
         {
             return global::Topologic.Wire.ByEdges(BH.Engine.Geometry.Query.SubParts(polyLine).Select(x => BH.Topologic.Core.Edge.Create.ByLine(x)));
+        }
+
+        internal static global::Topologic.Wire ByPolyCurve(PolyCurve bhomPolyCurve)
+        {
+            List<global::Topologic.Edge> edges = new List<global::Topologic.Edge>();
+            foreach (ICurve bhomCastCurve in bhomPolyCurve.Curves)
+            {
+                edges.Add(Edge.Create.ByCurve(bhomCastCurve));
+            }
+
+            return ByEdges(edges);
         }
 
         internal static global::Topologic.Wire ByCurve(ICurve bhomCurve)
@@ -33,24 +44,16 @@ namespace BH.Topologic.Core.Wire
             PolyCurve bhomPolyCurve = bhomCurve as PolyCurve;
             if(bhomPolyCurve != null)
             {
-                List<global::Topologic.Edge> edges = new List<global::Topologic.Edge>();
-                foreach(ICurve bhomCastCurve in bhomPolyCurve.Curves)
-                {
-                    edges.Add(Edge.Create.ByCurve(bhomCastCurve));
-                }
-
-                return ByEdges(edges);
+                return ByPolyCurve(bhomPolyCurve);
             }
 
-            Polyline bhomPolyline = bhomCurve as Polyline;
-            if (bhomPolyline != null)
+            Polyline bhomPolyLine = bhomCurve as Polyline;
+            if (bhomPolyLine != null)
             {
-                return ByPolyline(bhomPolyline);
+                return ByPolyLine(bhomPolyLine);
             }
-
-            // Otherwise, create a wire with a single curve.
+            
             throw new NotImplementedException("Cannot create a wire from a single curve.");
-            //return global::Topologic.Wire.ByEdges(edges);
         }
     }
 

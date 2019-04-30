@@ -85,9 +85,9 @@ namespace BH.Topologic.Core.CellComplex
 
     public static partial class Create
     {
-        public static global::Topologic.CellComplex ByFaces(IEnumerable<global::Topologic.Face> faces)
+        public static global::Topologic.CellComplex ByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance = 0.0001)
         {
-            return global::Topologic.CellComplex.ByFaces(faces);
+            return global::Topologic.CellComplex.ByFaces(faces, tolerance);
         }
 
         public static global::Topologic.CellComplex ByCells(IEnumerable<global::Topologic.Cell> cells)

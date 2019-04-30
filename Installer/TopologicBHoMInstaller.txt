@@ -41,7 +41,7 @@
   !insertmacro MUI_PAGE_WELCOME
   !insertmacro MUI_PAGE_LICENSE "TopologicLicense.rtf"
   !insertmacro MUI_PAGE_COMPONENTS
-  !insertmacro MUI_PAGE_DIRECTORY
+  ;!insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES
   
   !insertmacro MUI_UNPAGE_CONFIRM
@@ -55,25 +55,11 @@
 ;--------------------------------
 ;Installer Sections
  
-Section "TopologicBHoM" TopologicBHoM
+Section "TopologicBHoM" SectionTopologicBHoM
 
   SetOutPath "$INSTDIR"	
   
-  File "C:\Users\Nicholas Wardhana\AppData\Roaming\Grasshopper\Libraries\BHoM\*"
-  
-  ;ADD YOUR OWN FILES HERE...
-  ;Check if 
-  ClearErrors
-  IfFileExists "$APPDATA\BHoM\Assemblies\BHoM.dll" +8 0
-  MessageBox MB_YESNO "No BHoM installation is found. Press Yes to install it, otherwise press No to skip this process (you will need to download and install it separately)." IDYES InstallBHoMYes IDNO InstallBHoMNo
-  InstallBHoMYes:
-	File BHoM_v2.2.beta.0.exe
-    ExecWait "$INSTDIR\BHoM_v2.2.beta.0.exe" $0
-	${If} $0 <> 0
-      MessageBox MB_OK "Failed to install BHoM. Please install it manually."
-    ${EndIf}
-  InstallBHoMNo:
-  Delete "$INSTDIR\BHoM_v2.2.beta.0.exe"
+  File "..\Build\*.dll"
   
   ClearErrors
   SetRegView 64
@@ -101,13 +87,27 @@ Section "TopologicBHoM" TopologicBHoM
   ${EndIf}
 SectionEnd
 
+
+Section "BHoM 2.2.0" SectionBHoM
+
+  ;ADD YOUR OWN FILES HERE...
+  ;Check if 
+  File BHoM_v2.2.beta.0.exe
+  ExecWait "$INSTDIR\BHoM_v2.2.beta.0.exe" $0
+  ${If} $0 <> 0
+    MessageBox MB_OK "BHoM was not installed."
+  ${EndIf}
+  ;InstallBHoMNo:
+  Delete "$INSTDIR\BHoM_v2.2.beta.0.exe"
+SectionEnd
+
 Section #hidden, run after all other sections
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 SectionEnd
 
 Function .onInit
   IntOp $R0 ${SF_RO} | ${SF_SELECTED}
-  SectionSetFlags ${TopologicBHoM} $R0
+  SectionSetFlags ${SectionTopologicBHoM} $R0
 FunctionEnd
 
 Function InstallVCRedistributable
@@ -116,20 +116,22 @@ Function InstallVCRedistributable
 	File vc_redist.x64.exe
     ExecWait "$INSTDIR\vc_redist.x64.exe" $0
     ${If} $0 <> 0
-      MessageBox MB_OK "Failed to install Visual Studio 2017 Redistributable (x64). Please install the redistributable manually."
+      MessageBox MB_OK "Visual Studio 2017 Redistributable (x64) was not installed."
     ${EndIf}
+    Delete $INSTDIR\vc_redist.x64.exe ;bug: if the installation halts (e.g. not restarted), this file is not deleted
   InstallVCRedistributableFinish:
-  Delete $INSTDIR\vc_redist.x64.exe ;bug: if the installation halts (e.g. not restarted), this file is not deleted
 FunctionEnd
 ;--------------------------------
 ;Descriptions
 
   ;Language strings
-  LangString DESC_TopologicBHoM ${LANG_ENGLISH} "Installs the Topologic BHoM package."
+  LangString DESC_TopologicBHoM ${LANG_ENGLISH} "Installs the TopologicBHoM package."
+  LangString DESC_BHoM ${LANG_ENGLISH} "Installs BHoM 2.2 package."
 
   ;Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${TopologicBHoM} $(DESC_TopologicBHoM)
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionTopologicBHoM} $(DESC_TopologicBHoM)
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionBHoM} $(DESC_BHoM)
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;--------------------------------

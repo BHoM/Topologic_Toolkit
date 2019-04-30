@@ -106,22 +106,50 @@ namespace BH.Topologic.Core.Topology
                 return BH.Topologic.Core.Vertex.Create.ByPoint(bhomPoint);
             }
 
-            BH.oM.Geometry.Line bhomLine = geometry as BH.oM.Geometry.Line;
-            if (bhomLine != null)
-            {
-                return BH.Topologic.Core.Edge.Create.ByLine(bhomLine);
-            }
-
+            // Handle polyline and polycurve first
             BH.oM.Geometry.Polyline bhomPolyline = geometry as BH.oM.Geometry.Polyline;
             if (bhomPolyline != null)
             {
-                return BH.Topologic.Core.Wire.Create.ByPolyline(bhomPolyline);
+                return BH.Topologic.Core.Wire.Create.ByPolyLine(bhomPolyline);
             }
 
-            BH.oM.Geometry.PlanarSurface bhomPlanarSurface = geometry as BH.oM.Geometry.PlanarSurface;
-            if (bhomPlanarSurface != null)
+            BH.oM.Geometry.PolyCurve bhomPolyCurve = geometry as BH.oM.Geometry.PolyCurve;
+            if (bhomPolyCurve != null)
             {
-                return BH.Topologic.Core.Face.Create.ByPlanarSurface(bhomPlanarSurface);
+                return BH.Topologic.Core.Wire.Create.ByPolyCurve(bhomPolyCurve);
+            }
+
+            // Then curve
+            BH.oM.Geometry.ICurve bhomCurve = geometry as BH.oM.Geometry.ICurve;
+            if (bhomCurve != null)
+            {
+                return BH.Topologic.Core.Edge.Create.ByCurve(bhomCurve);
+            }
+
+            // Do polysurface first.
+            BH.oM.Geometry.PolySurface bhomPolySurface = geometry as BH.oM.Geometry.PolySurface;
+            if (bhomPolySurface != null)
+            {
+                return BH.Topologic.Core.Shell.Create.ByPolySurface(bhomPolySurface, tolerance);
+            }
+
+            // Then surface
+            BH.oM.Geometry.ISurface bhomSurface = geometry as BH.oM.Geometry.ISurface;
+            if (bhomSurface != null)
+            {
+                return BH.Topologic.Core.Face.Create.BySurface(bhomSurface);
+            }
+
+            BH.oM.Geometry.ISolid bhomSolid = geometry as BH.oM.Geometry.ISolid;
+            if (bhomSolid != null)
+            {
+                return BH.Topologic.Core.Cell.Create.BySolid(bhomSolid, tolerance);
+            }
+
+            BH.oM.Geometry.CompositeGeometry bhomCompositeGeometry = geometry as BH.oM.Geometry.CompositeGeometry;
+            if (bhomCompositeGeometry != null)
+            {
+                return BH.Topologic.Core.Cluster.Create.ByCompositeGeometry(bhomCompositeGeometry, tolerance);
             }
 
             throw new NotImplementedException("This BHoM geometry is not yet supported.");

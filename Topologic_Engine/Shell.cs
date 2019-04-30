@@ -70,8 +70,20 @@ namespace BH.Topologic.Core.Shell
 
     public static partial class Create
     {
-        public static global::Topologic.Shell ByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance = 0.001)
+        public static global::Topologic.Shell ByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance = 0.0001)
         {
+            return global::Topologic.Shell.ByFaces(faces, tolerance);
+        }
+
+        internal static global::Topologic.Shell ByPolySurface(PolySurface bhomPolySurface, double tolerance)
+        {
+            List<global::Topologic.Face> faces = new List<global::Topologic.Face>();
+            foreach(ISurface bhomSurface in bhomPolySurface.Surfaces)
+            {
+                global::Topologic.Face face = Topologic.Core.Face.Create.BySurface(bhomSurface);
+                faces.Add(face);
+            }
+
             return global::Topologic.Shell.ByFaces(faces, tolerance);
         }
     }

@@ -10,7 +10,6 @@ using BH.oM.Environment.Elements;
 
 namespace BH.Topologic.Core.Face
 {
-
     public static partial class Convert
     {
         internal static IGeometry BasicGeometry(this global::Topologic.Face face)
@@ -106,7 +105,18 @@ namespace BH.Topologic.Core.Face
             return global::Topologic.Face.ByEdges(edges);
         }
 
-        public static global::Topologic.Face ByPlanarSurface(PlanarSurface bhomPlanarSurface)
+        internal static global::Topologic.Face BySurface(ISurface bhomSurface)
+        {
+            BH.oM.Geometry.PlanarSurface bhomPlanarSurface = bhomSurface as BH.oM.Geometry.PlanarSurface;
+            if (bhomPlanarSurface != null)
+            {
+                return ByPlanarSurface(bhomPlanarSurface);
+            }
+
+            throw new NotImplementedException("This type of BHoM surface is not yet supported.");
+        }
+
+        internal static global::Topologic.Face ByPlanarSurface(PlanarSurface bhomPlanarSurface)
         {
             ICurve bhomExternalBoundary = bhomPlanarSurface.ExternalBoundary;
             List<ICurve> bhomInternalBoundaries = bhomPlanarSurface.InternalBoundaries;
@@ -120,7 +130,6 @@ namespace BH.Topologic.Core.Face
             }
             return global::Topologic.Face.ByExternalInternalBoundaries(externalBoundary, internalBoundaries);
         }
-
     }
 
     public static partial class Modify
