@@ -26,7 +26,8 @@ namespace BH.Topologic.Core.Face
             {
                 bhomInternalBoundaries.Add(Wire.Convert.Polyline(internalBoundary));
             }
-            return new PlanarSurface { ExternalBoundary = bhomExternalBoundary, InternalBoundaries = bhomInternalBoundaries };
+            PlanarSurface planarSurface = new PlanarSurface { ExternalBoundary = bhomExternalBoundary, InternalBoundaries = bhomInternalBoundaries };
+            return planarSurface;
         }
     }
 
@@ -123,10 +124,13 @@ namespace BH.Topologic.Core.Face
 
             global::Topologic.Wire externalBoundary = Wire.Create.ByCurve(bhomExternalBoundary);
             List<global::Topologic.Wire> internalBoundaries = new List<global::Topologic.Wire>();
-            foreach(ICurve bhomInternalBoundary in bhomInternalBoundaries)
+            if (bhomInternalBoundaries != null)
             {
-                global::Topologic.Wire internalBoundary = Wire.Create.ByCurve(bhomInternalBoundary);
-                internalBoundaries.Add(internalBoundary);
+                foreach (ICurve bhomInternalBoundary in bhomInternalBoundaries)
+                {
+                    global::Topologic.Wire internalBoundary = Wire.Create.ByCurve(bhomInternalBoundary);
+                    internalBoundaries.Add(internalBoundary);
+                }
             }
             return global::Topologic.Face.ByExternalInternalBoundaries(externalBoundary, internalBoundaries);
         }

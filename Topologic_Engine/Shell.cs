@@ -86,5 +86,32 @@ namespace BH.Topologic.Core.Shell
 
             return global::Topologic.Shell.ByFaces(faces, tolerance);
         }
+
+        internal static global::Topologic.Shell ByMesh(Mesh bhomMesh)
+        {
+            List<global::Topologic.Face> faces = new List<global::Topologic.Face>();
+            foreach (BH.oM.Geometry.Face bhomFace in bhomMesh.Faces)
+            {
+                List<Point> bhomControlPoints = new List<Point>();
+                Point p1 = bhomMesh.Vertices[bhomFace.A];
+                bhomControlPoints.Add(p1);
+                Point p2 = bhomMesh.Vertices[bhomFace.B];
+                bhomControlPoints.Add(p2);
+                Point p3 = bhomMesh.Vertices[bhomFace.C];
+                bhomControlPoints.Add(p3);
+                Point p4 = null;
+                if (bhomFace.D >= 0)
+                {
+                    p4 = bhomMesh.Vertices[bhomFace.D];
+                    bhomControlPoints.Add(p4);
+                }
+                bhomControlPoints.Add(p1); // close the wire
+                Polyline bhomBoundary = new Polyline { ControlPoints = bhomControlPoints };
+                PlanarSurface bhomPlanarSurface = new PlanarSurface { ExternalBoundary = bhomBoundary, InternalBoundaries = null };
+                global::Topologic.Face face = Face.Create.ByPlanarSurface(bhomPlanarSurface);
+                faces.Add(face);
+            }
+            return global::Topologic.Shell.ByFaces(faces, 0.0001);
+        }
     }
 }

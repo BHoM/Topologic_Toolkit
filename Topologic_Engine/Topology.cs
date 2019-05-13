@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BH.oM.Geometry;
+using Topologic;
 using Topologic.Utilities;
 
 namespace BH.Topologic.Core.Topology
@@ -152,13 +153,45 @@ namespace BH.Topologic.Core.Topology
                 return BH.Topologic.Core.Cell.Create.BySolid(bhomSolid, tolerance);
             }
 
+            BH.oM.Geometry.BoundingBox bhomBoundingBox = geometry as BH.oM.Geometry.BoundingBox;
+            if (bhomBoundingBox != null)
+            {
+                return BH.Topologic.Core.Cell.Create.ByBoundingBox(bhomBoundingBox);
+            }
+
             BH.oM.Geometry.CompositeGeometry bhomCompositeGeometry = geometry as BH.oM.Geometry.CompositeGeometry;
             if (bhomCompositeGeometry != null)
             {
                 return BH.Topologic.Core.Cluster.Create.ByCompositeGeometry(bhomCompositeGeometry, tolerance);
             }
 
+            BH.oM.Geometry.Mesh bhomMesh = geometry as BH.oM.Geometry.Mesh;
+            if (bhomMesh != null)
+            {
+                return BH.Topologic.Core.Topology.Create.ByMesh(bhomMesh);
+            }
+
             throw new NotImplementedException("This BHoM geometry is not yet supported.");
+        }
+
+        private static global::Topologic.Topology ByMesh(Mesh bhomMesh)
+        {
+            global::Topologic.Shell shell = BH.Topologic.Core.Shell.Create.ByMesh(bhomMesh);
+            if (shell == null)
+                return null;
+
+            List<global::Topologic.Face> faces = shell.Faces;
+            if(faces.Count == 0)
+            {
+                return null;
+            }
+            else if (faces.Count == 1)
+            {
+                return faces[0];
+            }
+
+            // else
+            return shell;
         }
 
         public static List<global::Topologic.Topology> ByVerticesIndices(IEnumerable<global::Topologic.Vertex> vertices, IEnumerable<List<int>> vertexIndices)
