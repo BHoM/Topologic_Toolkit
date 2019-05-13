@@ -117,8 +117,33 @@ namespace BH.Topologic.Core.Cell
             {
                 return ByBoundaryRepresentation(bhomBoundaryRepresentation, tolerance);
             }
-            
+
+            Cuboid bhomCuboid = bhomSolid as Cuboid;
+            if (bhomCuboid != null)
+            {
+                return ByCuboid(bhomCuboid);
+            }
+
+            Sphere bhomSphere = bhomSolid as Sphere;
+            if (bhomSphere != null)
+            {
+                return BySphere(bhomSphere);
+            }
             throw new NotImplementedException("This type of Solid is not yet supported.");
+        }
+
+        internal static global::Topologic.Cell BySphere(Sphere bhomSphere)
+        {
+            return global::Topologic.Utilities.CellUtility.BySphere(bhomSphere.Centre.X, bhomSphere.Centre.Y, bhomSphere.Centre.Z, bhomSphere.Radius);
+        }
+
+        internal static global::Topologic.Cell ByCuboid(Cuboid bhomCuboid)
+        {
+            return global::Topologic.Utilities.CellUtility.ByCuboid(
+                bhomCuboid.CoordinateSystem.Origin.X, bhomCuboid.CoordinateSystem.Origin.Y, bhomCuboid.CoordinateSystem.Origin.Z,
+                bhomCuboid.Length, bhomCuboid.Depth, bhomCuboid.Depth,
+                bhomCuboid.CoordinateSystem.Z.X, bhomCuboid.CoordinateSystem.Z.Y, bhomCuboid.CoordinateSystem.Z.Z,
+                bhomCuboid.CoordinateSystem.X.X, bhomCuboid.CoordinateSystem.X.Y, bhomCuboid.CoordinateSystem.X.Z);
         }
 
         internal static global::Topologic.Cell ByBoundaryRepresentation(BoundaryRepresentation bhomBoundaryRepresentation, double tolerance)
@@ -131,6 +156,13 @@ namespace BH.Topologic.Core.Cell
             }
 
             return global::Topologic.Cell.ByFaces(faces, tolerance);
+        }
+
+        internal static global::Topologic.Topology ByBoundingBox(BoundingBox bhomBoundingBox)
+        {
+            global::Topologic.Vertex minVertex = BH.Topologic.Core.Vertex.Create.ByPoint(bhomBoundingBox.Min);
+            global::Topologic.Vertex maxVertex = BH.Topologic.Core.Vertex.Create.ByPoint(bhomBoundingBox.Max);
+            return global::Topologic.Utilities.CellUtility.ByTwoCorners(minVertex, maxVertex);
         }
     }
 }

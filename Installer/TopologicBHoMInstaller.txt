@@ -17,7 +17,7 @@
   OutFile "TopologicBHoMInstaller.exe"
 
   ;Default installation folder
-  InstallDir "$APPDATA\Grasshopper\Libraries\BHoM"
+  InstallDir "$APPDATA\BHoM\Assemblies"
   
   ;Request application privileges for Windows Vista
   RequestExecutionLevel admin 
@@ -54,12 +54,43 @@
 
 ;--------------------------------
 ;Installer Sections
- 
-Section "TopologicBHoM" SectionTopologicBHoM
 
-  SetOutPath "$INSTDIR"	
+Section "TopologicBHoM" SectionTopologicBHoM
+  ;Does not actually do anything. Installation in the unnamed section, as it needs to be done after installing BHoM
+SectionEnd
+
+Section "BHoM 2.2.0" SectionBHoM
+  SetOutPath "$APPDATA\Grasshopper\Libraries"
+  FileOpen $9 BH.UI.Grasshopper.ghlink w ;Opens a Empty File an fills it
+  FileWrite $9 "$APPDATA\BHoM\Assemblies\BH.UI.Grasshopper.gha"
+  FileClose $9 ;Closes the filled file
+  
+  SetOutPath "$APPDATA\BHoM\DataSets"	
+  File /r "..\Build\DataSets"
+  
+  SetOutPath "$APPDATA\BHoM\Assemblies"	
+  File /r "..\..\Grasshopper_Toolkit\Build\*.gha"
+  ;ADD YOUR OWN FILES HERE...
+  ;Check if 
+  ; File BHoM_v2.2.beta.0.exe
+  ; ExecWait "$INSTDIR\BHoM_v2.2.beta.0.exe" $0
+  ; ${If} $0 <> 0
+    ; MessageBox MB_OK "BHoM was not installed."
+  ; ${EndIf}
+  ; StrCpy installBHoM 1
+  ; ;InstallBHoMNo:
+  ; Delete "$INSTDIR\BHoM_v2.2.beta.0.exe"
+SectionEnd
+ 
+Section #hidden, run after all other sections
+  SetOutPath "$APPDATA\BHoM\Assemblies"	
   
   File "..\Build\*.dll"
+  File "..\..\BHoM_Adapter\Build\*.dll"
+  File "..\..\BHoM_Engine\Build\*.dll"
+  File "..\..\BHoM_UI\Build\*.dll"
+  File "..\..\Rhinoceros_Toolkit\Build\*.dll"
+  File "..\..\Grasshopper_Toolkit\Build\*.dll"
   
   ClearErrors
   SetRegView 64
@@ -85,24 +116,8 @@ Section "TopologicBHoM" SectionTopologicBHoM
 	  ${EndIf}
     ${EndIf}
   ${EndIf}
-SectionEnd
 
-
-Section "BHoM 2.2.0" SectionBHoM
-
-  ;ADD YOUR OWN FILES HERE...
-  ;Check if 
-  File BHoM_v2.2.beta.0.exe
-  ExecWait "$INSTDIR\BHoM_v2.2.beta.0.exe" $0
-  ${If} $0 <> 0
-    MessageBox MB_OK "BHoM was not installed."
-  ${EndIf}
-  ;InstallBHoMNo:
-  Delete "$INSTDIR\BHoM_v2.2.beta.0.exe"
-SectionEnd
-
-Section #hidden, run after all other sections
-  WriteUninstaller "$INSTDIR\Uninstall.exe"
+  WriteUninstaller "Uninstall.exe"
 SectionEnd
 
 Function .onInit

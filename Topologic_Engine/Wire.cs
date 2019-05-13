@@ -72,6 +72,10 @@ namespace BH.Topologic.Core.Wire
             {
                 bhomPoints.Add(Vertex.Convert.Point(vertex));
             }
+            if(bhomPoints.Count > 0 && wire.IsClosed)
+            {
+                bhomPoints.Add(bhomPoints[0]);
+            }
 
             return new Polyline { ControlPoints = bhomPoints };
         }
