@@ -58,9 +58,9 @@ namespace BH.Topologic.Core.Edge
             return edge.Wires;
         }
 
-        public static global::Topologic.Vertex SharedVertex(this global::Topologic.Edge edge, global::Topologic.Edge otherEdge)
+        public static List<global::Topologic.Vertex> SharedVertices(this global::Topologic.Edge edge, global::Topologic.Edge otherEdge)
         {
-            return edge.SharedVertex(otherEdge);
+            return edge.SharedVertices(otherEdge);
         }
 
         public static int Type(this global::Topologic.Edge edge)

@@ -16,6 +16,5 @@ namespace BH.Topologic.Core.Context
         {
             return context.Topology;
         }
-
     }
 }
