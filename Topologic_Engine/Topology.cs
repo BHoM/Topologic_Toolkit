@@ -117,13 +117,37 @@ namespace BH.Topologic.Core.Topology
             BH.oM.Geometry.Polyline bhomPolyline = geometry as BH.oM.Geometry.Polyline;
             if (bhomPolyline != null)
             {
-                return BH.Topologic.Core.Wire.Create.ByPolyLine(bhomPolyline);
+                if (bhomPolyline.ControlPoints.Count < 2)
+                {
+                    throw new Exception("An invalid polyline with fewer than 2 control points is given.");
+                }
+                else if (bhomPolyline.ControlPoints.Count == 2)
+                {
+                    BH.oM.Geometry.Line bhomLine = BH.Engine.Geometry.Create.Line(bhomPolyline.ControlPoints[0], bhomPolyline.ControlPoints[1]);
+                    return BH.Topologic.Core.Edge.Create.ByLine(bhomLine);
+                }
+                else
+                {
+                    return BH.Topologic.Core.Wire.Create.ByPolyLine(bhomPolyline);
+                }
             }
 
             BH.oM.Geometry.PolyCurve bhomPolyCurve = geometry as BH.oM.Geometry.PolyCurve;
             if (bhomPolyCurve != null)
             {
-                return BH.Topologic.Core.Wire.Create.ByPolyCurve(bhomPolyCurve);
+                if (bhomPolyCurve.Curves.Count == 0)
+                {
+                    throw new Exception("An invalid polycurve with no curve is given.");
+                }
+                else if (bhomPolyCurve.Curves.Count == 1)
+                {
+                    BH.oM.Geometry.ICurve bhomACurve = bhomPolyCurve.Curves[0];
+                    return BH.Topologic.Core.Edge.Create.ByCurve(bhomACurve);
+                }
+                else
+                {
+                    return BH.Topologic.Core.Wire.Create.ByPolyCurve(bhomPolyCurve);
+                }
             }
 
             // Then curve
