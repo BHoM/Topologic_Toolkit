@@ -214,6 +214,11 @@ namespace BH.Topologic.Core.Topology
             return topology.Dimensionality;
         }
 
+        public static List<global::Topologic.Aperture> Apertures(this global::Topologic.Topology topology)
+        {
+            return topology.Apertures;
+        }
+
         public static List<global::Topologic.Topology> Contents(this global::Topologic.Topology topology)
         {
             return topology.Contents;
@@ -293,14 +298,9 @@ namespace BH.Topologic.Core.Topology
 
     public static partial class Modify
     {
-        public static global::Topologic.Topology AddContent(this global::Topologic.Topology topology, global::Topologic.Topology content)
+        public static global::Topologic.Topology AddContents(this global::Topologic.Topology topology, List<global::Topologic.Topology> contents, int typeFilter = 0)
         {
-            return topology.AddContent(content);
-        }
-
-        public static global::Topologic.Topology AddContent(this global::Topologic.Topology topology, global::Topologic.Topology content, int typeFilter = 255)
-        {
-            return topology.AddContent(content, typeFilter);
+            return topology.AddContents(contents, typeFilter);
         }
 
         public static global::Topologic.Topology AddApertures(this global::Topologic.Topology topology, IEnumerable<global::Topologic.Topology> apertureTopologies)
@@ -330,6 +330,11 @@ namespace BH.Topologic.Core.Topology
         public static global::Topologic.Topology Difference(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.Difference(otherTopology);
+        }
+
+        public static List<global::Topologic.Topology> Filter(List<global::Topologic.Topology> topologies, int typeFilter)
+        {
+            return global::Topologic.Topology.Filter(topologies, typeFilter);
         }
 
         public static global::Topologic.Topology Impose(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)

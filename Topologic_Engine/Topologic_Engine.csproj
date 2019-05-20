@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.cs" />
+    <Compile Include="Aperture.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="CellComplex.cs" />
     <Compile Include="Cluster.cs" />
