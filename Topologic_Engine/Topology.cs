@@ -315,7 +315,7 @@ namespace BH.Topologic.Core.Topology
 
         public static Dictionary<String, Object> Dictionary(this global::Topologic.Topology topology)
         {
-            return topology.Dictionary();
+            return topology.Dictionary;
         }
 
     }

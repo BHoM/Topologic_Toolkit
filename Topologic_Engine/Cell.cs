@@ -100,7 +100,7 @@ namespace BH.Topologic.Core.Cell
 
     public static partial class Create
     {
-        public static global::Topologic.Cell ByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance)
+        public static global::Topologic.Cell ByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance = 0.0001)
         {
             return global::Topologic.Cell.ByFaces(faces, tolerance);
         }
