@@ -317,7 +317,6 @@ namespace BH.Topologic.Core.Topology
         {
             return topology.Dictionary;
         }
-
     }
 
     public static partial class Modify
