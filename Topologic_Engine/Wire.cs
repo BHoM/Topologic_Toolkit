@@ -59,12 +59,12 @@ namespace BH.Topologic.Core.Wire
 
     public static partial class Convert
     {
-        internal static IGeometry BasicGeometry(this global::Topologic.Wire wire)
+        internal static IGeometry BasicGeometry(global::Topologic.Wire wire)
         {
             return Polyline(wire);
         }
 
-        internal static Polyline Polyline(this global::Topologic.Wire wire)
+        internal static Polyline Polyline(global::Topologic.Wire wire)
         {
             List<global::Topologic.Vertex> vertices = wire.Vertices;
             List<Point> bhomPoints = new List<Point>();
@@ -84,27 +84,27 @@ namespace BH.Topologic.Core.Wire
     public static partial class Query
     {
 
-        public static List<global::Topologic.Edge> Edges(this global::Topologic.Wire wire)
+        public static List<global::Topologic.Edge> Edges(global::Topologic.Wire wire)
         {
             return wire.Edges;
         }
 
-        public static List<global::Topologic.Face> Faces(this global::Topologic.Wire wire)
+        public static List<global::Topologic.Face> Faces(global::Topologic.Wire wire)
         {
             return wire.Faces;
         }
 
-        public static List<global::Topologic.Vertex> Vertices(this global::Topologic.Wire wire)
+        public static List<global::Topologic.Vertex> Vertices(global::Topologic.Wire wire)
         {
-            return wire.Vertices();
+            return wire.Vertices;
         }
 
-        public static bool IsClosed(this global::Topologic.Wire wire)
+        public static bool IsClosed(global::Topologic.Wire wire)
         {
             return wire.IsClosed;
         }
 
-        public static int Type(this global::Topologic.Wire wire)
+        public static int Type(global::Topologic.Wire wire)
         {
             return global::Topologic.Wire.Type();
         }

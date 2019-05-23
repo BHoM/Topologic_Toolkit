@@ -12,12 +12,12 @@ namespace BH.Topologic.Core.Shell
 {
     public static partial class Convert
     {
-        internal static IGeometry BasicGeometry(this global::Topologic.Shell shell)
+        internal static IGeometry BasicGeometry(global::Topologic.Shell shell)
         {
             return PolySurface(shell);
         }
 
-        internal static PolySurface PolySurface(this global::Topologic.Shell shell)
+        internal static PolySurface PolySurface(global::Topologic.Shell shell)
         {
             List<global::Topologic.Face> faces = shell.Faces;
             List<ISurface> bhomSurfaces = new List<ISurface>();
@@ -31,39 +31,39 @@ namespace BH.Topologic.Core.Shell
 
     public static partial class Query
     {
-        public static List<global::Topologic.Cell> Cells(this global::Topologic.Shell shell)
+        public static List<global::Topologic.Cell> Cells(global::Topologic.Shell shell)
         {
             return shell.Cells;
         }
 
-        public static List<global::Topologic.Face> Faces(this global::Topologic.Shell shell)
+        public static List<global::Topologic.Face> Faces(global::Topologic.Shell shell)
         {
             return shell.Faces;
         }
 
-        public static List<global::Topologic.Wire> Wires(this global::Topologic.Shell shell)
+        public static List<global::Topologic.Wire> Wires(global::Topologic.Shell shell)
         {
             return shell.Wires;
         }
 
-        public static List<global::Topologic.Edge> Edges(this global::Topologic.Shell shell)
+        public static List<global::Topologic.Edge> Edges(global::Topologic.Shell shell)
         {
             return shell.Edges;
         }
 
-        public static bool IsClosed(this global::Topologic.Shell shell)
+        public static bool IsClosed(global::Topologic.Shell shell)
         {
             return shell.IsClosed;
         }
 
-        public static int Type(this global::Topologic.Shell shell)
+        public static int Type(global::Topologic.Shell shell)
         {
             return global::Topologic.Shell.Type();
         }
 
-        public static List<global::Topologic.Vertex> Vertices(this global::Topologic.Shell shell)
+        public static List<global::Topologic.Vertex> Vertices(global::Topologic.Shell shell)
         {
-            return shell.Vertices();
+            return shell.Vertices;
         }
 
     }
