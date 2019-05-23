@@ -12,7 +12,7 @@ namespace BH.Topologic.Core.Context
 {
     public static partial class Query
     {
-        public static global::Topologic.Topology Topology(this global::Topologic.Context context)
+        public static global::Topologic.Topology Topology(global::Topologic.Context context)
         {
             return context.Topology;
         }

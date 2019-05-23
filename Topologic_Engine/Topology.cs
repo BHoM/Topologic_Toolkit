@@ -12,8 +12,8 @@ namespace BH.Topologic.Core.Topology
 
     public static partial class Convert
     {
-        //public static List<IGeometry> Geometry(this global::Topologic.Topology topology)
-        public static IGeometry Geometry(this global::Topologic.Topology topology)
+        //public static List<IGeometry> Geometry(global::Topologic.Topology topology)
+        public static IGeometry Geometry(global::Topologic.Topology topology)
         {
             //return null;
             return BasicGeometry(topology); // will this do?
@@ -22,7 +22,7 @@ namespace BH.Topologic.Core.Topology
             //return output;
         }
 
-        //internal static void RecursiveGeometry(this global::Topologic.Topology topology, ref List<IGeometry> output)
+        //internal static void RecursiveGeometry(global::Topologic.Topology topology, ref List<IGeometry> output)
         //{
         //    List<IGeometry> objects = new List<IGeometry>();
         //    objects.Add(BasicGeometry(topology));
@@ -43,7 +43,7 @@ namespace BH.Topologic.Core.Topology
         //    output.Add(objects);
         //}
 
-        internal static IGeometry BasicGeometry(this global::Topologic.Topology topology)
+        internal static IGeometry BasicGeometry(global::Topologic.Topology topology)
         {
             global::Topologic.Vertex vertex = topology as global::Topologic.Vertex;
             if (vertex != null)
@@ -233,87 +233,87 @@ namespace BH.Topologic.Core.Topology
 
     public static partial class Query
     {
-        public static int Dimensionality(this global::Topologic.Topology topology)
+        public static int Dimensionality(global::Topologic.Topology topology)
         {
             return topology.Dimensionality;
         }
 
-        public static List<global::Topologic.Aperture> Apertures(this global::Topologic.Topology topology)
+        public static List<global::Topologic.Aperture> Apertures(global::Topologic.Topology topology)
         {
             return topology.Apertures;
         }
 
-        public static List<global::Topologic.Topology> Contents(this global::Topologic.Topology topology)
+        public static List<global::Topologic.Topology> Contents(global::Topologic.Topology topology)
         {
             return topology.Contents;
         }
 
-        public static List<global::Topologic.Context> Contexts(this global::Topologic.Topology topology)
+        public static List<global::Topologic.Context> Contexts(global::Topologic.Topology topology)
         {
             return topology.Contexts;
         }
 
-        public static string Analyze(this global::Topologic.Topology topology)
+        public static string Analyze(global::Topologic.Topology topology)
         {
             return topology.Analyze();
         }
 
-        public static List<global::Topologic.Shell> Shells(this global::Topologic.Topology topology)
+        public static List<global::Topologic.Shell> Shells(global::Topologic.Topology topology)
         {
             return topology.Shells;
         }
 
-        public static List<global::Topologic.Face> Faces(this global::Topologic.Topology topology)
+        public static List<global::Topologic.Face> Faces(global::Topologic.Topology topology)
         {
             return topology.Faces;
         }
 
-        public static List<global::Topologic.Wire> Wires(this global::Topologic.Topology topology)
+        public static List<global::Topologic.Wire> Wires(global::Topologic.Topology topology)
         {
             return topology.Wires;
         }
 
-        public static List<global::Topologic.Edge> Edges(this global::Topologic.Topology topology)
+        public static List<global::Topologic.Edge> Edges(global::Topologic.Topology topology)
         {
             return topology.Edges;
         }
 
-        public static List<global::Topologic.Vertex> Vertices(this global::Topologic.Topology topology)
+        public static List<global::Topologic.Vertex> Vertices(global::Topologic.Topology topology)
         {
             return topology.Vertices;
         }
 
-        public static List<global::Topologic.Cell> Cells(this global::Topologic.Topology topology)
+        public static List<global::Topologic.Cell> Cells(global::Topologic.Topology topology)
         {
             return topology.Cells;
         }
 
-        public static List<global::Topologic.CellComplex> CellComplexes(this global::Topologic.Topology topology)
+        public static List<global::Topologic.CellComplex> CellComplexes(global::Topologic.Topology topology)
         {
             return topology.CellComplexes;
         }
 
-        public static bool IsSame(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static bool IsSame(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.IsSame(otherTopology);
         }
 
-        public static global::Topologic.Topology ClosestSimplestSubshape(this global::Topologic.Topology topology, global::Topologic.Topology selector)
+        public static global::Topologic.Topology ClosestSimplestSubshape(global::Topologic.Topology topology, global::Topologic.Topology selector)
         {
             return topology.ClosestSimplestSubshape(selector);
         }
 
-        public static String TypeAsString(this global::Topologic.Topology topology)
+        public static String TypeAsString(global::Topologic.Topology topology)
         {
-            return topology.TypeAsString();
+            return topology.TypeAsString;
         }
 
-        public static int Type(this global::Topologic.Topology topology)
+        public static int Type(global::Topologic.Topology topology)
         {
-            return topology.Type();
+            return topology.Type;
         }
 
-        public static Dictionary<String, Object> Dictionary(this global::Topologic.Topology topology)
+        public static Dictionary<String, Object> Dictionary(global::Topologic.Topology topology)
         {
             return topology.Dictionary;
         }
@@ -321,27 +321,18 @@ namespace BH.Topologic.Core.Topology
 
     public static partial class Modify
     {
-        public static global::Topologic.Topology AddContents(this global::Topologic.Topology topology, List<global::Topologic.Topology> contents, int typeFilter = 0)
+        public static global::Topologic.Topology AddContents(global::Topologic.Topology topology, List<global::Topologic.Topology> contents, int typeFilter = 0)
         {
             return topology.AddContents(contents, typeFilter);
         }
 
-        public static global::Topologic.Topology AddApertures(this global::Topologic.Topology topology, IEnumerable<global::Topologic.Topology> apertureTopologies)
+        public static global::Topologic.Topology AddApertures(global::Topologic.Topology topology, IEnumerable<global::Topologic.Topology> apertureTopologies)
         {
             return topology.AddApertures(apertureTopologies);
         }
 
-        public static global::Topologic.Topology AddContext(this global::Topologic.Topology topology, global::Topologic.Context context)
-        {
-            return topology.AddContext(context);
-        }
 
-        public static global::Topologic.Topology RemoveContext(this global::Topologic.Topology topology, global::Topologic.Context context)
-        {
-            return topology.RemoveContext(context);
-        }
-
-        public static global::Topologic.Topology SetDictionary(this global::Topologic.Topology topology, Dictionary<String, Object> dictionary)
+        public static global::Topologic.Topology SetDictionary(global::Topologic.Topology topology, Dictionary<String, Object> dictionary)
         {
             return topology.SetDictionary(dictionary);
         }
@@ -350,7 +341,7 @@ namespace BH.Topologic.Core.Topology
 
     public static partial class Compute
     {
-        public static global::Topologic.Topology Difference(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Difference(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.Difference(otherTopology);
         }
@@ -360,57 +351,57 @@ namespace BH.Topologic.Core.Topology
             return global::Topologic.Topology.Filter(topologies, typeFilter);
         }
 
-        public static global::Topologic.Topology Impose(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Impose(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.Impose(otherTopology);
         }
 
-        public static global::Topologic.Topology Imprint(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Imprint(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.Imprint(otherTopology);
         }
 
-        public static global::Topologic.Topology Intersect(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Intersect(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.Intersect(otherTopology);
         }
 
-        public static global::Topologic.Topology Merge(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Merge(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.Merge(otherTopology);
         }
 
-        public static global::Topologic.Topology SelfMerge(this global::Topologic.Topology topology)
+        public static global::Topologic.Topology SelfMerge(global::Topologic.Topology topology)
         {
             return topology.SelfMerge();
         }
 
-        public static global::Topologic.Topology Slice(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Slice(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.Slice(otherTopology);
         }
 
-        public static global::Topologic.Topology Divide(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Divide(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.Divide(otherTopology);
         }
 
-        public static global::Topologic.Topology Union(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Union(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.Union(otherTopology);
         }
 
-        public static global::Topologic.Topology XOR(this global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology XOR(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
         {
             return topology.XOR(otherTopology);
         }
 
-        public static bool ExportToBRep(this global::Topologic.Topology topology, String path)
+        public static bool ExportToBRep(global::Topologic.Topology topology, String path)
         {
             return topology.ExportToBRep(path);
         }
 
-        public static global::Topologic.Topology ShallowCopy(this global::Topologic.Topology topology)
+        public static global::Topologic.Topology ShallowCopy(global::Topologic.Topology topology)
         {
             return topology.ShallowCopy();
         }

@@ -8,7 +8,7 @@ namespace BH.Topologic.Core.Aperture
 {
     public static partial class Query
     {
-        public static global::Topologic.Topology Topology(this global::Topologic.Aperture aperture)
+        public static global::Topologic.Topology Topology(global::Topologic.Aperture aperture)
         {
             return aperture.Topology;
         }

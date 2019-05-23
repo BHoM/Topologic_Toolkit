@@ -25,12 +25,12 @@ namespace BH.Topologic.Utilities.EdgeUtility
 
     public static partial class Query
     {
-        public static double ParameterAtVertex(this global::Topologic.Edge edge, global::Topologic.Vertex vertex)
+        public static double ParameterAtVertex(global::Topologic.Edge edge, global::Topologic.Vertex vertex)
         {
             return global::Topologic.Utilities.EdgeUtility.ParameterAtVertex(edge, vertex);
         }
 
-        public static global::Topologic.Vertex VertexAtParameter(this global::Topologic.Edge edge, double u)
+        public static global::Topologic.Vertex VertexAtParameter(global::Topologic.Edge edge, double u)
         {
             return global::Topologic.Utilities.EdgeUtility.VertexAtParameter(edge, u);
         }

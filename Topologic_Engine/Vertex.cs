@@ -12,12 +12,12 @@ namespace BH.Topologic.Core.Vertex
 {
     public static partial class Convert
     {
-        internal static IGeometry BasicGeometry(this global::Topologic.Vertex vertex)
+        internal static IGeometry BasicGeometry(global::Topologic.Vertex vertex)
         {
             return Point(vertex);
         }
 
-        internal static Point Point(this global::Topologic.Vertex vertex)
+        internal static Point Point(global::Topologic.Vertex vertex)
         {
             return new Point { X = vertex.X, Y = vertex.Y, Z = vertex.Z };
         }
@@ -25,32 +25,32 @@ namespace BH.Topologic.Core.Vertex
 
     public static partial class Query
     {
-        public static List<double> Coordinates(this global::Topologic.Vertex vertex)
+        public static List<double> Coordinates(global::Topologic.Vertex vertex)
         {
             return vertex.Coordinates;
         }
 
-        public static double X(this global::Topologic.Vertex vertex)
+        public static double X(global::Topologic.Vertex vertex)
         {
             return vertex.X;
         }
 
-        public static double Y(this global::Topologic.Vertex vertex)
+        public static double Y(global::Topologic.Vertex vertex)
         {
             return vertex.Y;
         }
 
-        public static double Z(this global::Topologic.Vertex vertex)
+        public static double Z(global::Topologic.Vertex vertex)
         {
             return vertex.Z;
         }
 
-        public static int Type(this global::Topologic.Vertex vertex)
+        public static int Type(global::Topologic.Vertex vertex)
         {
             return global::Topologic.Vertex.Type();
         }
 
-        public static List<global::Topologic.Edge> Edges(this global::Topologic.Vertex vertex)
+        public static List<global::Topologic.Edge> Edges(global::Topologic.Vertex vertex)
         {
             return vertex.Edges;
         }

@@ -12,7 +12,7 @@ namespace BH.Topologic.Core.Edge
 {
     public static partial class Convert
     {
-        internal static IGeometry BasicGeometry(this global::Topologic.Edge edge)
+        internal static IGeometry BasicGeometry(global::Topologic.Edge edge)
         {
             Object edgeGeometry = edge.BasicGeometry;
 
@@ -20,7 +20,7 @@ namespace BH.Topologic.Core.Edge
             return Line(edge);
         }
 
-        internal static Line Line(this global::Topologic.Edge edge)
+        internal static Line Line(global::Topologic.Edge edge)
         {
             global::Topologic.Vertex startVertex = edge.StartVertex;
             Point bhomStartPoint = Vertex.Convert.Point(startVertex);
@@ -33,37 +33,37 @@ namespace BH.Topologic.Core.Edge
 
     public static partial class Query
     {
-        public static List<global::Topologic.Edge> AdjacentEdges(this global::Topologic.Edge edge)
+        public static List<global::Topologic.Edge> AdjacentEdges(global::Topologic.Edge edge)
         {
             return edge.AdjacentEdges;
         }
 
-        public static global::Topologic.Vertex StartVertex(this global::Topologic.Edge edge)
+        public static global::Topologic.Vertex StartVertex(global::Topologic.Edge edge)
         {
             return edge.StartVertex;
         }
 
-        public static global::Topologic.Vertex EndVertex(this global::Topologic.Edge edge)
+        public static global::Topologic.Vertex EndVertex(global::Topologic.Edge edge)
         {
             return edge.EndVertex;
         }
 
-        public static List<global::Topologic.Vertex> Vertices(this global::Topologic.Edge edge)
+        public static List<global::Topologic.Vertex> Vertices(global::Topologic.Edge edge)
         {
             return edge.Vertices;
         }
 
-        public static List<global::Topologic.Wire> Wires(this global::Topologic.Edge edge)
+        public static List<global::Topologic.Wire> Wires(global::Topologic.Edge edge)
         {
             return edge.Wires;
         }
 
-        public static List<global::Topologic.Vertex> SharedVertices(this global::Topologic.Edge edge, global::Topologic.Edge otherEdge)
+        public static List<global::Topologic.Vertex> SharedVertices(global::Topologic.Edge edge, global::Topologic.Edge otherEdge)
         {
             return edge.SharedVertices(otherEdge);
         }
 
-        public static int Type(this global::Topologic.Edge edge)
+        public static int Type(global::Topologic.Edge edge)
         {
             return global::Topologic.Edge.Type();
         }

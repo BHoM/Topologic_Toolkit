@@ -12,12 +12,12 @@ namespace BH.Topologic.Core.Face
 {
     public static partial class Convert
     {
-        internal static IGeometry BasicGeometry(this global::Topologic.Face face)
+        internal static IGeometry BasicGeometry(global::Topologic.Face face)
         {
             return PlanarSurface(face);
         }
 
-        internal static PlanarSurface PlanarSurface(this global::Topologic.Face face)
+        internal static PlanarSurface PlanarSurface(global::Topologic.Face face)
         {
             Polyline bhomExternalBoundary = Wire.Convert.Polyline(face.ExternalBoundary);
             List<ICurve> bhomInternalBoundaries = new List<ICurve>();
@@ -33,57 +33,57 @@ namespace BH.Topologic.Core.Face
 
     public static partial class Query
     {
-        public static List<global::Topologic.Face> AdjacentFaces(this global::Topologic.Face face)
+        public static List<global::Topologic.Face> AdjacentFaces(global::Topologic.Face face)
         {
             return face.AdjacentFaces;
         }
 
-        public static List<global::Topologic.Cell> Cells(this global::Topologic.Face face)
+        public static List<global::Topologic.Cell> Cells(global::Topologic.Face face)
         {
             return face.Cells;
         }
 
-        public static List<global::Topologic.Shell> Shells(this global::Topologic.Face face)
+        public static List<global::Topologic.Shell> Shells(global::Topologic.Face face)
         {
             return face.Shells;
         }
 
-        public static List<global::Topologic.Vertex> Vertices(this global::Topologic.Face face)
+        public static List<global::Topologic.Vertex> Vertices(global::Topologic.Face face)
         {
             return face.Vertices;
         }
 
-        public static List<global::Topologic.Wire> Wires(this global::Topologic.Face face)
+        public static List<global::Topologic.Wire> Wires(global::Topologic.Face face)
         {
             return face.Wires;
         }
 
-        public static List<global::Topologic.Edge> SharedEdges(this global::Topologic.Face face, global::Topologic.Face otherFace)
+        public static List<global::Topologic.Edge> SharedEdges(global::Topologic.Face face, global::Topologic.Face otherFace)
         {
             return face.SharedEdges(otherFace);
         }
 
-        public static global::Topologic.Wire ExternalBoundary(this global::Topologic.Face face)
+        public static global::Topologic.Wire ExternalBoundary(global::Topologic.Face face)
         {
             return face.ExternalBoundary;
         }
 
-        public static List<global::Topologic.Wire> InternalBoundaries(this global::Topologic.Face face)
+        public static List<global::Topologic.Wire> InternalBoundaries(global::Topologic.Face face)
         {
             return face.InternalBoundaries;
         }
 
-        public static int Type(this global::Topologic.Face face)
+        public static int Type(global::Topologic.Face face)
         {
             return global::Topologic.Face.Type();
         }
 
-        public static List<global::Topologic.Edge> Edges(this global::Topologic.Face face)
+        public static List<global::Topologic.Edge> Edges(global::Topologic.Face face)
         {
-            return face.Edges();
+            return face.Edges;
         }
 
-        public static List<global::Topologic.Vertex> SharedVertices(this global::Topologic.Face face, global::Topologic.Face otherFace)
+        public static List<global::Topologic.Vertex> SharedVertices(global::Topologic.Face face, global::Topologic.Face otherFace)
         {
             return face.SharedVertices(otherFace);
         }
@@ -138,12 +138,12 @@ namespace BH.Topologic.Core.Face
 
     public static partial class Modify
     {
-        public static global::Topologic.Face AddInternalBoundaries(this global::Topologic.Face face, List<global::Topologic.Wire> internalBoundaries)
+        public static global::Topologic.Face AddInternalBoundaries(global::Topologic.Face face, List<global::Topologic.Wire> internalBoundaries)
         {
             return face.AddInternalBoundaries(internalBoundaries);
         }
 
-        public static global::Topologic.Face AddApertureDesign(this global::Topologic.Face face, global::Topologic.Face apertureDesign, int numEdgeSamples)
+        public static global::Topologic.Face AddApertureDesign(global::Topologic.Face face, global::Topologic.Face apertureDesign, int numEdgeSamples)
         {
             return face.AddApertureDesign(apertureDesign, numEdgeSamples);
         }
