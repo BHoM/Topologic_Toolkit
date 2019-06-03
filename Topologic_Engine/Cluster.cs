@@ -66,7 +66,7 @@ namespace BH.Topologic.Core.Cluster
             return cluster.CellComplexes;
         }
 
-        public static int Type(global::Topologic.Cluster cluster)
+        public static int Type()
         {
             return global::Topologic.Cluster.Type();
         }

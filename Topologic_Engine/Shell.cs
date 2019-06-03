@@ -56,7 +56,7 @@ namespace BH.Topologic.Core.Shell
             return shell.IsClosed;
         }
 
-        public static int Type(global::Topologic.Shell shell)
+        public static int Type()
         {
             return global::Topologic.Shell.Type();
         }

@@ -91,7 +91,7 @@ namespace BH.Topologic.Core.Cell
             return cell.InternalBoundaries;
         }
 
-        public static int Type(global::Topologic.Cell cell)
+        public static int Type()
         {
             return global::Topologic.Cell.Type();
         }

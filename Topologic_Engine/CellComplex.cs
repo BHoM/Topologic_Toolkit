@@ -76,7 +76,7 @@ namespace BH.Topologic.Core.CellComplex
             return cellComplex.NonManifoldFaces;
         }
 
-        public static int Type(global::Topologic.CellComplex cellComplex)
+        public static int Type()
         {
             return global::Topologic.CellComplex.Type();
         }

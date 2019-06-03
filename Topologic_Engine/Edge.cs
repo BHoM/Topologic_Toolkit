@@ -63,7 +63,7 @@ namespace BH.Topologic.Core.Edge
             return edge.SharedVertices(otherEdge);
         }
 
-        public static int Type(global::Topologic.Edge edge)
+        public static int Type()
         {
             return global::Topologic.Edge.Type();
         }

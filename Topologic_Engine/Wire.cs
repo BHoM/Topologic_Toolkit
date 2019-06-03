@@ -104,7 +104,7 @@ namespace BH.Topologic.Core.Wire
             return wire.IsClosed;
         }
 
-        public static int Type(global::Topologic.Wire wire)
+        public static int Type()
         {
             return global::Topologic.Wire.Type();
         }
