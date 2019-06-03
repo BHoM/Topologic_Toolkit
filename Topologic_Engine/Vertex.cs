@@ -45,7 +45,7 @@ namespace BH.Topologic.Core.Vertex
             return vertex.Z;
         }
 
-        public static int Type(global::Topologic.Vertex vertex)
+        public static int Type()
         {
             return global::Topologic.Vertex.Type();
         }

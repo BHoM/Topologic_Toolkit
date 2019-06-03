@@ -73,7 +73,7 @@ namespace BH.Topologic.Core.Face
             return face.InternalBoundaries;
         }
 
-        public static int Type(global::Topologic.Face face)
+        public static int Type()
         {
             return global::Topologic.Face.Type();
         }
