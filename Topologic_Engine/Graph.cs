@@ -157,7 +157,7 @@ namespace BH.Topologic.Core.Graph
             return graph.ShortestPath(startVertex, endVertex, vertexKey, edgeKey);
         }
 
-        public static double Distance(global::Topologic.Graph graph, global::Topologic.Vertex startVertex, global::Topologic.Vertex endVertex)
+        public static int Distance(global::Topologic.Graph graph, global::Topologic.Vertex startVertex, global::Topologic.Vertex endVertex)
         {
             return graph.Distance(startVertex, endVertex);
         }
