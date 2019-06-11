@@ -351,14 +351,14 @@ namespace BH.Topologic.Core.Topology
             return global::Topologic.Topology.Filter(topologies, typeFilter);
         }
 
-        public static global::Topologic.Topology Impose(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Impose(global::Topologic.Topology topology, global::Topologic.Topology tool)
         {
-            return topology.Impose(otherTopology);
+            return topology.Impose(tool);
         }
 
-        public static global::Topologic.Topology Imprint(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Imprint(global::Topologic.Topology topology, global::Topologic.Topology tool)
         {
-            return topology.Imprint(otherTopology);
+            return topology.Imprint(tool);
         }
 
         public static global::Topologic.Topology Intersect(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
@@ -376,14 +376,14 @@ namespace BH.Topologic.Core.Topology
             return topology.SelfMerge();
         }
 
-        public static global::Topologic.Topology Slice(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Slice(global::Topologic.Topology topology, global::Topologic.Topology tool)
         {
-            return topology.Slice(otherTopology);
+            return topology.Slice(tool);
         }
 
-        public static global::Topologic.Topology Divide(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Divide(global::Topologic.Topology topology, global::Topologic.Topology tool)
         {
-            return topology.Divide(otherTopology);
+            return topology.Divide(tool);
         }
 
         public static global::Topologic.Topology Union(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
