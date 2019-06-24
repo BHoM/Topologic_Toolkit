@@ -14,7 +14,7 @@ namespace BH.Topologic.Core.About
         public static String Version()
         {
             //return global::Topologic.About.Version();
-            return "0.7.5";
+            return "0.7.5.1";
         }
     }
 }
