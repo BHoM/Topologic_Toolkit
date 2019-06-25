@@ -1,4 +1,26 @@
-﻿using System;
+﻿/*
+ * This file is part of the Buildings and Habitats object Model (BHoM)
+ * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
+ *
+ * Each contributor holds copyright over their respective contributions.
+ * The project versioning (Git) records all such contribution source information.
+ *                                           
+ *                                                                              
+ * The BHoM is free software: you can redistribute it and/or modify         
+ * it under the terms of the GNU Lesser General Public License as published by  
+ * the Free Software Foundation, either version 3.0 of the License, or          
+ * (at your option) any later version.                                          
+ *                                                                              
+ * The BHoM is distributed in the hope that it will be useful,              
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of               
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the                 
+ * GNU Lesser General Public License for more details.                          
+ *                                                                            
+ * You should have received a copy of the GNU Lesser General Public License     
+ * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +30,7 @@ using Topologic;
 
 using BH.oM.Environment.Elements;
 
-namespace BH.Topologic.Core.Cell
+namespace BH.Engine.Topologic
 {
     public static partial class Convert
     {
@@ -23,7 +45,7 @@ namespace BH.Topologic.Core.Cell
             List<ISurface> bhomSurfaces = new List<ISurface>();
             foreach (global::Topologic.Face face in faces)
             {
-                bhomSurfaces.Add(Face.Convert.PlanarSurface(face));
+                bhomSurfaces.Add(Convert.PlanarSurface(face));
             }
             return new BoundaryRepresentation(bhomSurfaces);
         }
@@ -100,44 +122,44 @@ namespace BH.Topologic.Core.Cell
 
     public static partial class Create
     {
-        public static global::Topologic.Cell ByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance = 0.0001)
+        public static global::Topologic.Cell CellByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance = 0.0001)
         {
             return global::Topologic.Cell.ByFaces(faces, tolerance);
         }
 
-        public static global::Topologic.Cell ByShell(global::Topologic.Shell shell)
+        public static global::Topologic.Cell CellByShell(global::Topologic.Shell shell)
         {
             return global::Topologic.Cell.ByShell(shell);
         }
 
-        internal static global::Topologic.Cell BySolid(ISolid bhomSolid, double tolerance)
+        internal static global::Topologic.Cell CellBySolid(ISolid bhomSolid, double tolerance)
         {
             BoundaryRepresentation bhomBoundaryRepresentation = bhomSolid as BoundaryRepresentation;
             if (bhomBoundaryRepresentation != null)
             {
-                return ByBoundaryRepresentation(bhomBoundaryRepresentation, tolerance);
+                return CellByBoundaryRepresentation(bhomBoundaryRepresentation, tolerance);
             }
 
             Cuboid bhomCuboid = bhomSolid as Cuboid;
             if (bhomCuboid != null)
             {
-                return ByCuboid(bhomCuboid);
+                return CellByCuboid(bhomCuboid);
             }
 
             Sphere bhomSphere = bhomSolid as Sphere;
             if (bhomSphere != null)
             {
-                return BySphere(bhomSphere);
+                return CellBySphere(bhomSphere);
             }
             throw new NotImplementedException("This type of Solid is not yet supported.");
         }
 
-        internal static global::Topologic.Cell BySphere(Sphere bhomSphere)
+        internal static global::Topologic.Cell CellBySphere(Sphere bhomSphere)
         {
             return global::Topologic.Utilities.CellUtility.BySphere(bhomSphere.Centre.X, bhomSphere.Centre.Y, bhomSphere.Centre.Z, bhomSphere.Radius);
         }
 
-        internal static global::Topologic.Cell ByCuboid(Cuboid bhomCuboid)
+        internal static global::Topologic.Cell CellByCuboid(Cuboid bhomCuboid)
         {
             return global::Topologic.Utilities.CellUtility.ByCuboid(
                 bhomCuboid.CoordinateSystem.Origin.X, bhomCuboid.CoordinateSystem.Origin.Y, bhomCuboid.CoordinateSystem.Origin.Z,
@@ -146,22 +168,22 @@ namespace BH.Topologic.Core.Cell
                 bhomCuboid.CoordinateSystem.X.X, bhomCuboid.CoordinateSystem.X.Y, bhomCuboid.CoordinateSystem.X.Z);
         }
 
-        internal static global::Topologic.Cell ByBoundaryRepresentation(BoundaryRepresentation bhomBoundaryRepresentation, double tolerance)
+        internal static global::Topologic.Cell CellByBoundaryRepresentation(BoundaryRepresentation bhomBoundaryRepresentation, double tolerance)
         {
             List<global::Topologic.Face> faces = new List<global::Topologic.Face>();
             foreach (ISurface bhomSurface in bhomBoundaryRepresentation.Surfaces)
             {
-                global::Topologic.Face face = Topologic.Core.Face.Create.BySurface(bhomSurface);
+                global::Topologic.Face face = Create.FaceBySurface(bhomSurface);
                 faces.Add(face);
             }
 
             return global::Topologic.Cell.ByFaces(faces, tolerance);
         }
 
-        internal static global::Topologic.Topology ByBoundingBox(BoundingBox bhomBoundingBox)
+        internal static global::Topologic.Topology CellByBoundingBox(BoundingBox bhomBoundingBox)
         {
-            global::Topologic.Vertex minVertex = BH.Topologic.Core.Vertex.Create.ByPoint(bhomBoundingBox.Min);
-            global::Topologic.Vertex maxVertex = BH.Topologic.Core.Vertex.Create.ByPoint(bhomBoundingBox.Max);
+            global::Topologic.Vertex minVertex = Create.VertexByPoint(bhomBoundingBox.Min);
+            global::Topologic.Vertex maxVertex = Create.VertexByPoint(bhomBoundingBox.Max);
             return global::Topologic.Utilities.CellUtility.ByTwoCorners(minVertex, maxVertex);
         }
     }

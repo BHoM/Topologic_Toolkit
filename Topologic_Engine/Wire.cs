@@ -1,4 +1,26 @@
-﻿using System;
+﻿/*
+ * This file is part of the Buildings and Habitats object Model (BHoM)
+ * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
+ *
+ * Each contributor holds copyright over their respective contributions.
+ * The project versioning (Git) records all such contribution source information.
+ *                                           
+ *                                                                              
+ * The BHoM is free software: you can redistribute it and/or modify         
+ * it under the terms of the GNU Lesser General Public License as published by  
+ * the Free Software Foundation, either version 3.0 of the License, or          
+ * (at your option) any later version.                                          
+ *                                                                              
+ * The BHoM is distributed in the hope that it will be useful,              
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of               
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the                 
+ * GNU Lesser General Public License for more details.                          
+ *                                                                            
+ * You should have received a copy of the GNU Lesser General Public License     
+ * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,49 +30,49 @@ using Topologic;
 
 using BH.oM.Environment.Elements;
 
-namespace BH.Topologic.Core.Wire
+namespace BH.Engine.Topologic
 {
     public static partial class Create
     {
-        public static global::Topologic.Wire ByEdges(System.Collections.Generic.IEnumerable<global::Topologic.Edge> edges)
+        public static global::Topologic.Wire WireByEdges(System.Collections.Generic.IEnumerable<global::Topologic.Edge> edges)
         {
             return global::Topologic.Wire.ByEdges(edges);
         }
 
-        internal static global::Topologic.Wire ByLines(IEnumerable<Line> lines)
+        internal static global::Topologic.Wire WireByLines(IEnumerable<Line> lines)
         {
-            return global::Topologic.Wire.ByEdges(lines.Select(x => BH.Topologic.Core.Edge.Create.ByLine(x)));
+            return global::Topologic.Wire.ByEdges(lines.Select(x => Create.EdgeByLine(x)));
         }
 
-        internal static global::Topologic.Wire ByPolyLine(Polyline polyLine)
+        internal static global::Topologic.Wire WireByPolyLine(Polyline polyLine)
         {
-            return global::Topologic.Wire.ByEdges(BH.Engine.Geometry.Query.SubParts(polyLine).Select(x => BH.Topologic.Core.Edge.Create.ByLine(x)));
+            return global::Topologic.Wire.ByEdges(BH.Engine.Geometry.Query.SubParts(polyLine).Select(x => Create.EdgeByLine(x)));
         }
 
-        internal static global::Topologic.Wire ByPolyCurve(PolyCurve bhomPolyCurve)
+        internal static global::Topologic.Wire WireByPolyCurve(PolyCurve bhomPolyCurve)
         {
             List<global::Topologic.Edge> edges = new List<global::Topologic.Edge>();
             foreach (ICurve bhomCastCurve in bhomPolyCurve.Curves)
             {
-                edges.Add(Edge.Create.ByCurve(bhomCastCurve));
+                edges.Add(Create.EdgeByCurve(bhomCastCurve));
             }
 
-            return ByEdges(edges);
+            return WireByEdges(edges);
         }
 
-        internal static global::Topologic.Wire ByCurve(ICurve bhomCurve)
+        internal static global::Topologic.Wire WireByCurve(ICurve bhomCurve)
         {
             // If polycurve and polyline, get the curves and lines, then create a wire from all the curves
             PolyCurve bhomPolyCurve = bhomCurve as PolyCurve;
             if(bhomPolyCurve != null)
             {
-                return ByPolyCurve(bhomPolyCurve);
+                return WireByPolyCurve(bhomPolyCurve);
             }
 
             Polyline bhomPolyLine = bhomCurve as Polyline;
             if (bhomPolyLine != null)
             {
-                return ByPolyLine(bhomPolyLine);
+                return WireByPolyLine(bhomPolyLine);
             }
             
             throw new NotImplementedException("Cannot create a wire from a single curve.");
@@ -70,7 +92,7 @@ namespace BH.Topologic.Core.Wire
             List<Point> bhomPoints = new List<Point>();
             foreach (global::Topologic.Vertex vertex in vertices)
             {
-                bhomPoints.Add(Vertex.Convert.Point(vertex));
+                bhomPoints.Add(Convert.Point(vertex));
             }
             if(bhomPoints.Count > 0 && wire.IsClosed)
             {
@@ -104,7 +126,7 @@ namespace BH.Topologic.Core.Wire
             return wire.IsClosed;
         }
 
-        public static int Type()
+        public static int WireType()
         {
             return global::Topologic.Wire.Type();
         }

@@ -1,4 +1,26 @@
-﻿using System;
+﻿/*
+ * This file is part of the Buildings and Habitats object Model (BHoM)
+ * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
+ *
+ * Each contributor holds copyright over their respective contributions.
+ * The project versioning (Git) records all such contribution source information.
+ *                                           
+ *                                                                              
+ * The BHoM is free software: you can redistribute it and/or modify         
+ * it under the terms of the GNU Lesser General Public License as published by  
+ * the Free Software Foundation, either version 3.0 of the License, or          
+ * (at your option) any later version.                                          
+ *                                                                              
+ * The BHoM is distributed in the hope that it will be useful,              
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of               
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the                 
+ * GNU Lesser General Public License for more details.                          
+ *                                                                            
+ * You should have received a copy of the GNU Lesser General Public License     
+ * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +29,7 @@ using BH.oM.Geometry;
 using Topologic;
 using Topologic.Utilities;
 
-namespace BH.Topologic.Core.Topology
+namespace BH.Engine.Topologic
 {
 
     public static partial class Convert
@@ -48,49 +70,49 @@ namespace BH.Topologic.Core.Topology
             global::Topologic.Vertex vertex = topology as global::Topologic.Vertex;
             if (vertex != null)
             {
-                return Vertex.Convert.BasicGeometry(vertex);
+                return Convert.BasicGeometry(vertex);
             }
 
             global::Topologic.Edge edge = topology as global::Topologic.Edge;
             if (edge != null)
             {
-                return Edge.Convert.BasicGeometry(edge);
+                return Convert.BasicGeometry(edge);
             }
 
             global::Topologic.Wire wire = topology as global::Topologic.Wire;
             if (wire != null)
             {
-                return Wire.Convert.BasicGeometry(wire);
+                return Convert.BasicGeometry(wire);
             }
 
             global::Topologic.Face face = topology as global::Topologic.Face;
             if (face != null)
             {
-                return Face.Convert.BasicGeometry(face);
+                return Convert.BasicGeometry(face);
             }
 
             global::Topologic.Shell shell = topology as global::Topologic.Shell;
             if (shell != null)
             {
-                return Shell.Convert.BasicGeometry(shell);
+                return Convert.BasicGeometry(shell);
             }
 
             global::Topologic.Cell cell = topology as global::Topologic.Cell;
             if (cell != null)
             {
-                return Cell.Convert.BasicGeometry(cell);
+                return Convert.BasicGeometry(cell);
             }
 
             global::Topologic.CellComplex cellComplex = topology as global::Topologic.CellComplex;
             if (cellComplex != null)
             {
-                return CellComplex.Convert.BasicGeometry(cellComplex);
+                return Convert.BasicGeometry(cellComplex);
             }
 
             global::Topologic.Cluster cluster = topology as global::Topologic.Cluster;
             if (cluster != null)
             {
-                return Cluster.Convert.BasicGeometry(cluster);
+                return Convert.BasicGeometry(cluster);
             }
 
             //global::Topologic.Aperture aperture = topology as global::Topologic.Aperture;
@@ -105,12 +127,12 @@ namespace BH.Topologic.Core.Topology
 
     public static partial class Create
     {
-        public static global::Topologic.Topology ByGeometry(BH.oM.Geometry.IGeometry geometry, double tolerance = 0.0001)
+        public static global::Topologic.Topology TopologyByGeometry(BH.oM.Geometry.IGeometry geometry, double tolerance = 0.0001)
         {
             BH.oM.Geometry.Point bhomPoint = geometry as BH.oM.Geometry.Point;
             if (bhomPoint != null)
             {
-                return BH.Topologic.Core.Vertex.Create.ByPoint(bhomPoint);
+                return Create.VertexByPoint(bhomPoint);
             }
 
             // Handle polyline and polycurve first
@@ -124,11 +146,11 @@ namespace BH.Topologic.Core.Topology
                 else if (bhomPolyline.ControlPoints.Count == 2)
                 {
                     BH.oM.Geometry.Line bhomLine = BH.Engine.Geometry.Create.Line(bhomPolyline.ControlPoints[0], bhomPolyline.ControlPoints[1]);
-                    return BH.Topologic.Core.Edge.Create.ByLine(bhomLine);
+                    return Create.EdgeByLine(bhomLine);
                 }
                 else
                 {
-                    return BH.Topologic.Core.Wire.Create.ByPolyLine(bhomPolyline);
+                    return Create.WireByPolyLine(bhomPolyline);
                 }
             }
 
@@ -142,11 +164,11 @@ namespace BH.Topologic.Core.Topology
                 else if (bhomPolyCurve.Curves.Count == 1)
                 {
                     BH.oM.Geometry.ICurve bhomACurve = bhomPolyCurve.Curves[0];
-                    return BH.Topologic.Core.Edge.Create.ByCurve(bhomACurve);
+                    return Create.EdgeByCurve(bhomACurve);
                 }
                 else
                 {
-                    return BH.Topologic.Core.Wire.Create.ByPolyCurve(bhomPolyCurve);
+                    return Create.WireByPolyCurve(bhomPolyCurve);
                 }
             }
 
@@ -154,53 +176,53 @@ namespace BH.Topologic.Core.Topology
             BH.oM.Geometry.ICurve bhomCurve = geometry as BH.oM.Geometry.ICurve;
             if (bhomCurve != null)
             {
-                return BH.Topologic.Core.Edge.Create.ByCurve(bhomCurve);
+                return Create.EdgeByCurve(bhomCurve);
             }
 
             // Do polysurface first.
             BH.oM.Geometry.PolySurface bhomPolySurface = geometry as BH.oM.Geometry.PolySurface;
             if (bhomPolySurface != null)
             {
-                return BH.Topologic.Core.Shell.Create.ByPolySurface(bhomPolySurface, tolerance);
+                return Create.ShellByPolySurface(bhomPolySurface, tolerance);
             }
 
             // Then surface
             BH.oM.Geometry.ISurface bhomSurface = geometry as BH.oM.Geometry.ISurface;
             if (bhomSurface != null)
             {
-                return BH.Topologic.Core.Face.Create.BySurface(bhomSurface);
+                return Create.FaceBySurface(bhomSurface);
             }
 
             BH.oM.Geometry.ISolid bhomSolid = geometry as BH.oM.Geometry.ISolid;
             if (bhomSolid != null)
             {
-                return BH.Topologic.Core.Cell.Create.BySolid(bhomSolid, tolerance);
+                return Create.CellBySolid(bhomSolid, tolerance);
             }
 
             BH.oM.Geometry.BoundingBox bhomBoundingBox = geometry as BH.oM.Geometry.BoundingBox;
             if (bhomBoundingBox != null)
             {
-                return BH.Topologic.Core.Cell.Create.ByBoundingBox(bhomBoundingBox);
+                return Create.CellByBoundingBox(bhomBoundingBox);
             }
 
             BH.oM.Geometry.CompositeGeometry bhomCompositeGeometry = geometry as BH.oM.Geometry.CompositeGeometry;
             if (bhomCompositeGeometry != null)
             {
-                return BH.Topologic.Core.Cluster.Create.ByCompositeGeometry(bhomCompositeGeometry, tolerance);
+                return Create.ClusterByCompositeGeometry(bhomCompositeGeometry, tolerance);
             }
 
             BH.oM.Geometry.Mesh bhomMesh = geometry as BH.oM.Geometry.Mesh;
             if (bhomMesh != null)
             {
-                return BH.Topologic.Core.Topology.Create.ByMesh(bhomMesh);
+                return Create.TopologyByMesh(bhomMesh);
             }
 
             throw new NotImplementedException("This BHoM geometry is not yet supported.");
         }
 
-        private static global::Topologic.Topology ByMesh(Mesh bhomMesh)
+        private static global::Topologic.Topology TopologyByMesh(Mesh bhomMesh)
         {
-            global::Topologic.Shell shell = BH.Topologic.Core.Shell.Create.ByMesh(bhomMesh);
+            global::Topologic.Shell shell = Create.ShellByMesh(bhomMesh);
             if (shell == null)
                 return null;
 
@@ -218,12 +240,12 @@ namespace BH.Topologic.Core.Topology
             return shell;
         }
 
-        public static List<global::Topologic.Topology> ByVerticesIndices(IEnumerable<global::Topologic.Vertex> vertices, IEnumerable<List<int>> vertexIndices)
+        public static List<global::Topologic.Topology> TopologyByVerticesIndices(IEnumerable<global::Topologic.Vertex> vertices, IEnumerable<List<int>> vertexIndices)
         {
             return global::Topologic.Topology.ByVerticesIndices(vertices, vertexIndices);
         }
 
-        public static global::Topologic.Topology ByImportedBRep(String path)
+        public static global::Topologic.Topology TopologyByImportedBRep(String path)
         {
             return global::Topologic.Topology.ByImportedBRep(path);
         }
