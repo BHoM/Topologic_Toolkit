@@ -1,4 +1,26 @@
-﻿using System;
+﻿/*
+ * This file is part of the Buildings and Habitats object Model (BHoM)
+ * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
+ *
+ * Each contributor holds copyright over their respective contributions.
+ * The project versioning (Git) records all such contribution source information.
+ *                                           
+ *                                                                              
+ * The BHoM is free software: you can redistribute it and/or modify         
+ * it under the terms of the GNU Lesser General Public License as published by  
+ * the Free Software Foundation, either version 3.0 of the License, or          
+ * (at your option) any later version.                                          
+ *                                                                              
+ * The BHoM is distributed in the hope that it will be useful,              
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of               
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the                 
+ * GNU Lesser General Public License for more details.                          
+ *                                                                            
+ * You should have received a copy of the GNU Lesser General Public License     
+ * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +30,7 @@ using Topologic;
 
 using BH.oM.Environment.Elements;
 
-namespace BH.Topologic.Core.Face
+namespace BH.Engine.Topologic
 {
     public static partial class Convert
     {
@@ -19,12 +41,12 @@ namespace BH.Topologic.Core.Face
 
         internal static PlanarSurface PlanarSurface(global::Topologic.Face face)
         {
-            Polyline bhomExternalBoundary = Wire.Convert.Polyline(face.ExternalBoundary);
+            Polyline bhomExternalBoundary = Convert.Polyline(face.ExternalBoundary);
             List<ICurve> bhomInternalBoundaries = new List<ICurve>();
             List<global::Topologic.Wire> internalBoundaries = face.InternalBoundaries;
             foreach(global::Topologic.Wire internalBoundary in internalBoundaries)
             {
-                bhomInternalBoundaries.Add(Wire.Convert.Polyline(internalBoundary));
+                bhomInternalBoundaries.Add(Convert.Polyline(internalBoundary));
             }
             PlanarSurface planarSurface = new PlanarSurface { ExternalBoundary = bhomExternalBoundary, InternalBoundaries = bhomInternalBoundaries };
             return planarSurface;
@@ -73,7 +95,7 @@ namespace BH.Topologic.Core.Face
             return face.InternalBoundaries;
         }
 
-        public static int Type()
+        public static int FaceType()
         {
             return global::Topologic.Face.Type();
         }
@@ -91,44 +113,44 @@ namespace BH.Topologic.Core.Face
 
     public static partial class Create
     {
-        public static global::Topologic.Face ByWire(global::Topologic.Wire wire)
+        public static global::Topologic.Face FaceByWire(global::Topologic.Wire wire)
         {
             return global::Topologic.Face.ByWire(wire);
         }
 
-        public static global::Topologic.Face ByExternalInternalBoundaries(global::Topologic.Wire outerWire, IEnumerable<global::Topologic.Wire> innerWires)
+        public static global::Topologic.Face FaceByExternalInternalBoundaries(global::Topologic.Wire outerWire, IEnumerable<global::Topologic.Wire> innerWires)
         {
             return global::Topologic.Face.ByExternalInternalBoundaries(outerWire, innerWires);
         }
 
-        public static global::Topologic.Face ByEdges(IEnumerable<global::Topologic.Edge> edges)
+        public static global::Topologic.Face FaceByEdges(IEnumerable<global::Topologic.Edge> edges)
         {
             return global::Topologic.Face.ByEdges(edges);
         }
 
-        internal static global::Topologic.Face BySurface(ISurface bhomSurface)
+        internal static global::Topologic.Face FaceBySurface(ISurface bhomSurface)
         {
             BH.oM.Geometry.PlanarSurface bhomPlanarSurface = bhomSurface as BH.oM.Geometry.PlanarSurface;
             if (bhomPlanarSurface != null)
             {
-                return ByPlanarSurface(bhomPlanarSurface);
+                return FaceByPlanarSurface(bhomPlanarSurface);
             }
 
             throw new NotImplementedException("This type of BHoM surface is not yet supported.");
         }
 
-        internal static global::Topologic.Face ByPlanarSurface(PlanarSurface bhomPlanarSurface)
+        internal static global::Topologic.Face FaceByPlanarSurface(PlanarSurface bhomPlanarSurface)
         {
             ICurve bhomExternalBoundary = bhomPlanarSurface.ExternalBoundary;
             List<ICurve> bhomInternalBoundaries = bhomPlanarSurface.InternalBoundaries;
 
-            global::Topologic.Wire externalBoundary = Wire.Create.ByCurve(bhomExternalBoundary);
+            global::Topologic.Wire externalBoundary = Create.WireByCurve(bhomExternalBoundary);
             List<global::Topologic.Wire> internalBoundaries = new List<global::Topologic.Wire>();
             if (bhomInternalBoundaries != null)
             {
                 foreach (ICurve bhomInternalBoundary in bhomInternalBoundaries)
                 {
-                    global::Topologic.Wire internalBoundary = Wire.Create.ByCurve(bhomInternalBoundary);
+                    global::Topologic.Wire internalBoundary = Create.WireByCurve(bhomInternalBoundary);
                     internalBoundaries.Add(internalBoundary);
                 }
             }

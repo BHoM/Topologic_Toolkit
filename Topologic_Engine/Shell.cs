@@ -1,4 +1,26 @@
-﻿using System;
+﻿/*
+ * This file is part of the Buildings and Habitats object Model (BHoM)
+ * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
+ *
+ * Each contributor holds copyright over their respective contributions.
+ * The project versioning (Git) records all such contribution source information.
+ *                                           
+ *                                                                              
+ * The BHoM is free software: you can redistribute it and/or modify         
+ * it under the terms of the GNU Lesser General Public License as published by  
+ * the Free Software Foundation, either version 3.0 of the License, or          
+ * (at your option) any later version.                                          
+ *                                                                              
+ * The BHoM is distributed in the hope that it will be useful,              
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of               
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the                 
+ * GNU Lesser General Public License for more details.                          
+ *                                                                            
+ * You should have received a copy of the GNU Lesser General Public License     
+ * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +30,7 @@ using Topologic;
 
 using BH.oM.Environment.Elements;
 
-namespace BH.Topologic.Core.Shell
+namespace BH.Engine.Topologic
 {
     public static partial class Convert
     {
@@ -23,7 +45,7 @@ namespace BH.Topologic.Core.Shell
             List<ISurface> bhomSurfaces = new List<ISurface>();
             foreach (global::Topologic.Face face in faces)
             {
-                bhomSurfaces.Add(Face.Convert.PlanarSurface(face));
+                bhomSurfaces.Add(Convert.PlanarSurface(face));
             }
             return new PolySurface { Surfaces = bhomSurfaces };
         }
@@ -56,7 +78,7 @@ namespace BH.Topologic.Core.Shell
             return shell.IsClosed;
         }
 
-        public static int Type()
+        public static int ShellType()
         {
             return global::Topologic.Shell.Type();
         }
@@ -70,24 +92,24 @@ namespace BH.Topologic.Core.Shell
 
     public static partial class Create
     {
-        public static global::Topologic.Shell ByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance = 0.0001)
+        public static global::Topologic.Shell ShellByFaces(IEnumerable<global::Topologic.Face> faces, double tolerance = 0.0001)
         {
             return global::Topologic.Shell.ByFaces(faces, tolerance);
         }
 
-        internal static global::Topologic.Shell ByPolySurface(PolySurface bhomPolySurface, double tolerance)
+        internal static global::Topologic.Shell ShellByPolySurface(PolySurface bhomPolySurface, double tolerance)
         {
             List<global::Topologic.Face> faces = new List<global::Topologic.Face>();
             foreach(ISurface bhomSurface in bhomPolySurface.Surfaces)
             {
-                global::Topologic.Face face = Topologic.Core.Face.Create.BySurface(bhomSurface);
+                global::Topologic.Face face = Create.FaceBySurface(bhomSurface);
                 faces.Add(face);
             }
 
             return global::Topologic.Shell.ByFaces(faces, tolerance);
         }
 
-        internal static global::Topologic.Shell ByMesh(Mesh bhomMesh)
+        internal static global::Topologic.Shell ShellByMesh(Mesh bhomMesh)
         {
             List<global::Topologic.Face> faces = new List<global::Topologic.Face>();
             foreach (BH.oM.Geometry.Face bhomFace in bhomMesh.Faces)
@@ -108,7 +130,7 @@ namespace BH.Topologic.Core.Shell
                 bhomControlPoints.Add(p1); // close the wire
                 Polyline bhomBoundary = new Polyline { ControlPoints = bhomControlPoints };
                 PlanarSurface bhomPlanarSurface = new PlanarSurface { ExternalBoundary = bhomBoundary, InternalBoundaries = null };
-                global::Topologic.Face face = Face.Create.ByPlanarSurface(bhomPlanarSurface);
+                global::Topologic.Face face = Create.FaceByPlanarSurface(bhomPlanarSurface);
                 faces.Add(face);
             }
             return global::Topologic.Shell.ByFaces(faces, 0.0001);
