@@ -255,6 +255,11 @@ namespace BH.Engine.Topologic
 
     public static partial class Query
     {
+        public static global::Topologic.Topology SelectSubtopology(global::Topologic.Topology topology, global::Topologic.Topology selector, int typeFilter)
+        {
+            return topology.SelectSubtopology(selector, typeFilter);
+        }
+
         public static global::Topologic.Vertex Centroid(global::Topologic.Topology topology)
         {
             List<global::Topologic.Vertex> vertices = topology.Vertices;

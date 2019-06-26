@@ -113,7 +113,7 @@ namespace BH.Engine.Topologic
             return cell.InternalBoundaries;
         }
 
-        public static int Type()
+        public static int CellType()
         {
             return global::Topologic.Cell.Type();
         }
