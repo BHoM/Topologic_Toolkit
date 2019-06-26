@@ -71,9 +71,9 @@ namespace BH.Engine.Topologic
             return graph.VerticesAtCoordinates(x, y, z, tolerance);
         }
 
-        public static int Degree(global::Topologic.Graph graph, global::Topologic.Vertex vertex)
+        public static int VertexDegree(global::Topologic.Graph graph, global::Topologic.Vertex vertex)
         {
-            return graph.Degree(vertex);
+            return graph.VertexDegree(vertex);
         }
 
         public static List<global::Topologic.Vertex> AdjacentVertices(global::Topologic.Graph graph, global::Topologic.Vertex vertex)
