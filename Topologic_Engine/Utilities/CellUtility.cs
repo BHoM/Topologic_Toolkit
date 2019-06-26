@@ -45,10 +45,54 @@ namespace BH.Engine.Topologic
             return global::Topologic.Utilities.CellUtility.Volume(edge);
         }
 
-        public static bool Contains(global::Topologic.Cell cell, global::Topologic.Vertex vertex)
+        public static bool Contains(global::Topologic.Cell cell, global::Topologic.Vertex vertex, bool allowOnBoundary)
         {
-            return global::Topologic.Utilities.CellUtility.Contains(cell, vertex);
+            return global::Topologic.Utilities.CellUtility.Contains(cell, vertex, allowOnBoundary);
         }
     }
 
+    public static partial class Compute
+    {
+        public static global::Topologic.Vertex VertexInCell(global::Topologic.Cell cell, bool allowOnBoundary = false)
+        {
+            // Get all vertices
+            List<global::Topologic.Vertex> vertices = cell.Vertices;
+            if (vertices.Count == 0)
+            {
+                return null;
+            }
+
+            // Get the first vertex
+            global::Topologic.Vertex firstVertex = vertices[0];
+
+            foreach (global::Topologic.Vertex anotherVertex in vertices)
+            {
+                if (anotherVertex.IsSame(firstVertex))
+                {
+                    continue;
+                }
+
+                global::Topologic.Edge edge = global::Topologic.Edge.ByStartVertexEndVertex(firstVertex, anotherVertex);
+                global::Topologic.Vertex edgeCenterOfMass = TopologyUtility.CenterOfMass(edge);
+                if (CellUtility.Contains(cell, edgeCenterOfMass, allowOnBoundary))
+                {
+                    return edgeCenterOfMass;
+                }
+            }
+
+            return null;
+
+
+            //IGeometry bhomGeometry = Convert.BasicGeometry(edge);
+            //ICurve bhomCurve = bhomGeometry as ICurve;
+            //if (bhomCurve == null)
+            //{
+            //    return null;
+            //}
+
+            //Point bhomPoint = BH.Engine.Geometry.Query.PointInRegion(bhomCurve, acceptOnEdge, tolerance);
+            //global::Topologic.Vertex vertex = Create.VertexByPoint(bhomPoint);
+            //return vertex;
+        }
+    }
 }

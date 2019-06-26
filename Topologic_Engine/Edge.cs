@@ -89,20 +89,6 @@ namespace BH.Engine.Topologic
         {
             return global::Topologic.Edge.Type();
         }
-
-        public static global::Topologic.Vertex VertexInRegion(global::Topologic.Edge edge, bool acceptOnEdge = false, double tolerance = Tolerance.Distance)
-        {
-            IGeometry bhomGeometry = Convert.BasicGeometry(edge);
-            ICurve bhomCurve = bhomGeometry as ICurve;
-            if(bhomCurve == null)
-            {
-                return null;
-            }
-
-            Point bhomPoint = BH.Engine.Geometry.Query.PointInRegion(bhomCurve, acceptOnEdge, tolerance);
-            global::Topologic.Vertex vertex = Create.VertexByPoint(bhomPoint);
-            return vertex;
-        }
     }
 
     public static partial class Create

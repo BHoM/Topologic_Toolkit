@@ -372,6 +372,8 @@ namespace BH.Engine.Topologic
         {
             return topology.Dictionary;
         }
+
+
     }
 
     public static partial class Modify
