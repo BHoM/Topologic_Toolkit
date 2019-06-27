@@ -260,34 +260,6 @@ namespace BH.Engine.Topologic
             return topology.SelectSubtopology(selector, typeFilter);
         }
 
-        public static global::Topologic.Vertex Centroid(global::Topologic.Topology topology)
-        {
-            List<global::Topologic.Vertex> vertices = topology.Vertices;
-            if(vertices.Count == 0)
-            {
-                return null;
-            }
-
-            double averageX = 0.0;
-            double averageY = 0.0;
-            double averageZ = 0.0;
-            foreach(global::Topologic.Vertex vertex in vertices)
-            {
-                List<double> coordinates = vertex.Coordinates;
-                averageX += coordinates[0];
-                averageY += coordinates[1];
-                averageZ += coordinates[2];
-            }
-
-            double numOfVertices = (double)vertices.Count;
-            averageX /= numOfVertices;
-            averageY /= numOfVertices;
-            averageZ /= numOfVertices;
-
-            global::Topologic.Vertex centroid = global::Topologic.Vertex.ByCoordinates(averageX, averageY, averageZ);
-            return centroid;
-        }
-
         public static int Dimensionality(global::Topologic.Topology topology)
         {
             return topology.Dimensionality;

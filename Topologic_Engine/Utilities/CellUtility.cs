@@ -73,7 +73,7 @@ namespace BH.Engine.Topologic
                 }
 
                 global::Topologic.Edge edge = global::Topologic.Edge.ByStartVertexEndVertex(firstVertex, anotherVertex);
-                global::Topologic.Vertex edgeCenterOfMass = TopologyUtility.CenterOfMass(edge);
+                global::Topologic.Vertex edgeCenterOfMass = edge.CenterOfMass;
                 if (CellUtility.Contains(cell, edgeCenterOfMass, allowOnBoundary))
                 {
                     return edgeCenterOfMass;
