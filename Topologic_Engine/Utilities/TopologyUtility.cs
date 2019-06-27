@@ -39,7 +39,12 @@ namespace BH.Engine.Topologic
 
         public static global::Topologic.Vertex CenterOfMass(global::Topologic.Topology topology)
         {
-            return global::Topologic.Utilities.TopologyUtility.CenterOfMass(topology);
+            return topology.CenterOfMass;
+        }
+
+        public static global::Topologic.Vertex Centroid(global::Topologic.Topology topology)
+        {
+            return topology.Centroid;
         }
     }
 

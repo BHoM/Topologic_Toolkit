@@ -36,7 +36,7 @@ namespace BH.Engine.Topologic
         public static String Version()
         {
             //return global::Topologic.About.Version();
-            return "0.7.5.2";
+            return "0.7.6";
         }
     }
 }
