@@ -165,7 +165,8 @@ namespace BH.Engine.Topologic
                 bhomCuboid.CoordinateSystem.Origin.X, bhomCuboid.CoordinateSystem.Origin.Y, bhomCuboid.CoordinateSystem.Origin.Z,
                 bhomCuboid.Length, bhomCuboid.Depth, bhomCuboid.Depth,
                 bhomCuboid.CoordinateSystem.Z.X, bhomCuboid.CoordinateSystem.Z.Y, bhomCuboid.CoordinateSystem.Z.Z,
-                bhomCuboid.CoordinateSystem.X.X, bhomCuboid.CoordinateSystem.X.Y, bhomCuboid.CoordinateSystem.X.Z);
+                bhomCuboid.CoordinateSystem.X.X, bhomCuboid.CoordinateSystem.X.Y, bhomCuboid.CoordinateSystem.X.Z,
+                bhomCuboid.CoordinateSystem.Y.X, bhomCuboid.CoordinateSystem.Y.Y, bhomCuboid.CoordinateSystem.Y.Z);
         }
 
         internal static global::Topologic.Cell CellByBoundaryRepresentation(BoundaryRepresentation bhomBoundaryRepresentation, double tolerance)
