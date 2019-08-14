@@ -39,7 +39,7 @@ namespace BH.Engine.Topologic
             return global::Topologic.Wire.ByEdges(edges);
         }
 
-        internal static global::Topologic.Wire WireByLines(IEnumerable<Line> lines)
+        internal static global::Topologic.Wire WireByLines(IEnumerable<BH.oM.Geometry.Line> lines)
         {
             return global::Topologic.Wire.ByEdges(lines.Select(x => Create.EdgeByLine(x)));
         }

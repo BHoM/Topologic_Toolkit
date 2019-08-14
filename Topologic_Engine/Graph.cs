@@ -179,6 +179,11 @@ namespace BH.Engine.Topologic
             return graph.ShortestPath(startVertex, endVertex, vertexKey, edgeKey);
         }
 
+        public static List<global::Topologic.Wire> ShortestPaths(global::Topologic.Graph graph, global::Topologic.Vertex startVertex, global::Topologic.Vertex endVertex, String vertexKey, String edgeKey, Nullable<int> timeLimitinSeconds)
+        {
+            return graph.ShortestPaths(startVertex, endVertex, vertexKey, edgeKey, timeLimitinSeconds);
+        }
+
         public static int Distance(global::Topologic.Graph graph, global::Topologic.Vertex startVertex, global::Topologic.Vertex endVertex)
         {
             return graph.Distance(startVertex, endVertex);

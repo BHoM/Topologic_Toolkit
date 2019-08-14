@@ -42,13 +42,13 @@ namespace BH.Engine.Topologic
             return Line(edge);
         }
 
-        internal static Line Line(global::Topologic.Edge edge)
+        internal static BH.oM.Geometry.Line Line(global::Topologic.Edge edge)
         {
             global::Topologic.Vertex startVertex = edge.StartVertex;
             Point bhomStartPoint = Convert.Point(startVertex);
             global::Topologic.Vertex endVertex = edge.EndVertex;
             Point bhomEndPoint = Convert.Point(endVertex);
-            Line line = new Line { Start = bhomStartPoint, End = bhomEndPoint, Infinite = false };
+            BH.oM.Geometry.Line line = new BH.oM.Geometry.Line { Start = bhomStartPoint, End = bhomEndPoint, Infinite = false };
             return line;
         }
     }
@@ -98,7 +98,7 @@ namespace BH.Engine.Topologic
             return global::Topologic.Edge.ByStartVertexEndVertex(startVertex, endVertex);
         }
 
-        internal static global::Topologic.Edge EdgeByLine(Line bhomLine)
+        internal static global::Topologic.Edge EdgeByLine(BH.oM.Geometry.Line bhomLine)
         {
             if(bhomLine.Infinite)
             {
@@ -155,7 +155,7 @@ namespace BH.Engine.Topologic
             //    );
         }
 
-        internal static global::Topologic.Edge EdgeByNurbsCurve(NurbsCurve bhomNurbsCurve)
+        internal static global::Topologic.Edge EdgeByNurbsCurve(BH.oM.Geometry.NurbsCurve bhomNurbsCurve)
         {
             throw new NotImplementedException("NurbsCurves are not yet supported.");
 
@@ -179,7 +179,7 @@ namespace BH.Engine.Topologic
         internal static global::Topologic.Edge EdgeByCurve(ICurve bhomCurve)
         {
             // Currently only handle lines
-            Line bhomLine = bhomCurve as Line;
+            BH.oM.Geometry.Line bhomLine = bhomCurve as BH.oM.Geometry.Line;
             if(bhomLine != null)
             {
                 return EdgeByLine(bhomLine);
@@ -203,7 +203,7 @@ namespace BH.Engine.Topologic
                 return EdgeByEllipse(bhomEllipse);
             }
 
-            NurbsCurve bhomNurbsCurve = bhomCurve as NurbsCurve;
+            BH.oM.Geometry.NurbsCurve bhomNurbsCurve = bhomCurve as BH.oM.Geometry.NurbsCurve;
             if (bhomNurbsCurve != null)
             {
                 return EdgeByNurbsCurve(bhomNurbsCurve);
