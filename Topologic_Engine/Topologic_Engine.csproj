@@ -63,8 +63,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TopologicNET">
-      <HintPath>..\TopologicNET\TopologicNET.dll</HintPath>
+    <Reference Include="TopologicNET, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Build\TopologicNET.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
