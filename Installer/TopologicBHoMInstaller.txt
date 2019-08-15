@@ -61,36 +61,47 @@ SectionEnd
 
 Section "BHoM 2.2.0" SectionBHoM
   SetOutPath "$APPDATA\Grasshopper\Libraries"
-  FileOpen $9 BH.UI.Grasshopper.ghlink w ;Opens a Empty File an fills it
+  FileOpen $9 BH.UI.Grasshopper.ghlink w ;Opens an Empty File and fills it
   FileWrite $9 "$APPDATA\BHoM\Assemblies\BH.UI.Grasshopper.gha"
   FileClose $9 ;Closes the filled file
   
-  SetOutPath "$APPDATA\BHoM\DataSets"	
+  SetOutPath "$APPDATA\BHoM"	
   File /r "..\Build\DataSets"
   
   SetOutPath "$APPDATA\BHoM\Assemblies"	
   File /r "..\..\Grasshopper_Toolkit\Build\*.gha"
-  ;ADD YOUR OWN FILES HERE...
-  ;Check if 
-  ; File BHoM_v2.2.beta.0.exe
-  ; ExecWait "$INSTDIR\BHoM_v2.2.beta.0.exe" $0
-  ; ${If} $0 <> 0
-    ; MessageBox MB_OK "BHoM was not installed."
-  ; ${EndIf}
-  ; StrCpy installBHoM 1
-  ; ;InstallBHoMNo:
-  ; Delete "$INSTDIR\BHoM_v2.2.beta.0.exe"
 SectionEnd
  
 Section #hidden, run after all other sections
   SetOutPath "$APPDATA\BHoM\Assemblies"	
   
-  File "..\Build\*.dll"
-  File "..\..\BHoM_Adapter\Build\*.dll"
-  File "..\..\BHoM_Engine\Build\*.dll"
-  File "..\..\BHoM_UI\Build\*.dll"
-  File "..\..\Rhinoceros_Toolkit\Build\*.dll"
-  File "..\..\Grasshopper_Toolkit\Build\*.dll"
+  ;File "..\Build\*.dll"
+  ;File "..\..\BHoM_Adapter\Build\*.dll"
+  ;File "..\..\BHoM_Engine\Build\*.dll"
+  ;File "..\..\BHoM_UI\Build\*.dll"
+  ;File "..\..\Rhinoceros_Toolkit\Build\*.dll"
+  ;File "..\..\Grasshopper_Toolkit\Build\*.dll"
+  
+  File "..\..\BHoM\Build\*_OM.dll"
+  File "..\..\BHoM\Build\BHoM.dll"
+  File "..\..\BHoM_Engine\Build\*_Engine.dll"
+  File "..\..\BHoM_Engine\Build\DeepCloner.dll"
+  File "..\..\BHoM_Engine\Build\Humanizer.dll"
+  File "..\..\BHoM_Engine\Build\ICSharpCode.Decompiler.dll"
+  File "..\..\BHoM_Engine\Build\KellermanSoftware.Compare-NET-Objects.dll"
+  File "..\..\BHoM_Engine\Build\MongoDB.*.dll"
+  File "..\..\BHoM_Engine\Build\Mono.Cecil.*.dll"
+  File "..\..\BHoM_Engine\Build\System.Collections.Immutable.dll"
+  File "..\..\BHoM_Engine\Build\System.ValueTuple.dll"
+  File "..\..\BHoM_Adapter\Build\*_Adapter.dll"
+  File "..\..\BHoM_UI\Build\BHoM_UI.dll"
+  File "..\..\BHoM_UI\Build\UI_Engine.dll"
+  File "..\..\BHoM_UI\Build\UI_OM.dll"
+  File "..\..\Rhinoceros_Toolkit\Build\Rhinoceros_*.dll"
+  File "..\..\Grasshopper_Toolkit\Build\Grasshopper_Engine.dll"
+  File "..\..\Grasshopper_Toolkit\Build\Script.dll"
+  File "..\Build\TK*.dll"
+  File "..\Build\Topologic*.dll"
   
   ClearErrors
   SetRegView 64
@@ -117,7 +128,7 @@ Section #hidden, run after all other sections
     ${EndIf}
   ${EndIf}
 
-  WriteUninstaller "Uninstall.exe"
+  WriteUninstaller "$APPDATA\BHoM\Uninstall.exe"
 SectionEnd
 
 Function .onInit
@@ -126,7 +137,7 @@ Function .onInit
 FunctionEnd
 
 Function InstallVCRedistributable
-  MessageBox MB_YESNO "No Visual Studio 2017 Redistributale (x64) installation is found. Press Yes to install it, otherwise press No to skip this process (you will need to download and install it separately)." IDYES InstallVCRedistributableYes IDNO InstallVCRedistributableFinish
+  MessageBox MB_YESNO "No Visual Studio 2017 Redistributable (x64) installation is found. Press Yes to install it, otherwise press No to skip this process (you will need to download and install it separately)." IDYES InstallVCRedistributableYes IDNO InstallVCRedistributableFinish
   InstallVCRedistributableYes:
 	File vc_redist.x64.exe
     ExecWait "$INSTDIR\vc_redist.x64.exe" $0
