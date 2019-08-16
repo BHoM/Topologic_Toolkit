@@ -67,6 +67,11 @@ namespace BH.Engine.Topologic
 
         internal static IGeometry BasicGeometry(global::Topologic.Topology topology)
         {
+            if(topology == null)
+            {
+                return null;
+            }
+
             global::Topologic.Vertex vertex = topology as global::Topologic.Vertex;
             if (vertex != null)
             {
