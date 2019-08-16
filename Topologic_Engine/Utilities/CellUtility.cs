@@ -62,6 +62,13 @@ namespace BH.Engine.Topologic
                 return null;
             }
 
+            // If centroid is inside, use it
+            global::Topologic.Vertex cellCenterOfMass = cell.CenterOfMass;
+            if (CellUtility.Contains(cell, cellCenterOfMass, allowOnBoundary))
+            {
+                return cellCenterOfMass;
+            }
+
             // Get the first vertex
             global::Topologic.Vertex firstVertex = vertices[0];
 
@@ -81,18 +88,6 @@ namespace BH.Engine.Topologic
             }
 
             return null;
-
-
-            //IGeometry bhomGeometry = Convert.BasicGeometry(edge);
-            //ICurve bhomCurve = bhomGeometry as ICurve;
-            //if (bhomCurve == null)
-            //{
-            //    return null;
-            //}
-
-            //Point bhomPoint = BH.Engine.Geometry.Query.PointInRegion(bhomCurve, acceptOnEdge, tolerance);
-            //global::Topologic.Vertex vertex = Create.VertexByPoint(bhomPoint);
-            //return vertex;
         }
     }
 }
