@@ -45,15 +45,15 @@ namespace BH.Engine.Topologic
             return global::Topologic.Utilities.CellUtility.Volume(edge);
         }
 
-        public static bool Contains(global::Topologic.Cell cell, global::Topologic.Vertex vertex, bool allowOnBoundary)
+        public static bool Contains(global::Topologic.Cell cell, global::Topologic.Vertex vertex, bool allowOnBoundary = false, double tolerance = 0.0001)
         {
-            return global::Topologic.Utilities.CellUtility.Contains(cell, vertex, allowOnBoundary);
+            return global::Topologic.Utilities.CellUtility.Contains(cell, vertex, allowOnBoundary, tolerance);
         }
     }
 
     public static partial class Compute
     {
-        public static global::Topologic.Vertex VertexInCell(global::Topologic.Cell cell, bool allowOnBoundary = false)
+        public static global::Topologic.Vertex VertexInCell(global::Topologic.Cell cell, bool allowOnBoundary = false, double tolerance = 0.0001)
         {
             // Get all vertices
             List<global::Topologic.Vertex> vertices = cell.Vertices;
@@ -64,7 +64,7 @@ namespace BH.Engine.Topologic
 
             // If centroid is inside, use it
             global::Topologic.Vertex cellCenterOfMass = cell.CenterOfMass;
-            if (CellUtility.Contains(cell, cellCenterOfMass, allowOnBoundary))
+            if (CellUtility.Contains(cell, cellCenterOfMass, allowOnBoundary, tolerance))
             {
                 return cellCenterOfMass;
             }
@@ -81,7 +81,7 @@ namespace BH.Engine.Topologic
 
                 global::Topologic.Edge edge = global::Topologic.Edge.ByStartVertexEndVertex(firstVertex, anotherVertex);
                 global::Topologic.Vertex edgeCenterOfMass = edge.CenterOfMass;
-                if (CellUtility.Contains(cell, edgeCenterOfMass, allowOnBoundary))
+                if (CellUtility.Contains(cell, edgeCenterOfMass, allowOnBoundary, tolerance))
                 {
                     return edgeCenterOfMass;
                 }
