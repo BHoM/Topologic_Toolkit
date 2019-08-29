@@ -63,9 +63,9 @@ namespace BH.Engine.Topologic
 
     public static partial class Modify
     {
-        public static global::Topologic.Face TrimByWire(global::Topologic.Face face, global::Topologic.Wire wire)
+        public static global::Topologic.Face TrimByWire(global::Topologic.Face face, global::Topologic.Wire wire, bool reverseWire)
         {
-            return global::Topologic.Utilities.FaceUtility.TrimByWire(face, wire);
+            return global::Topologic.Utilities.FaceUtility.TrimByWire(face, wire, reverseWire);
         }
     }
 }
