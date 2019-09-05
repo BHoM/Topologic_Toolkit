@@ -40,9 +40,9 @@ namespace BH.Engine.Topologic
 
     public static partial class Query
     {
-        public static double Volume(global::Topologic.Cell edge)
+        public static double Volume(global::Topologic.Cell cell)
         {
-            return global::Topologic.Utilities.CellUtility.Volume(edge);
+            return global::Topologic.Utilities.CellUtility.Volume(cell);
         }
 
         public static bool Contains(global::Topologic.Cell cell, global::Topologic.Vertex vertex, bool allowOnBoundary = false, double tolerance = 0.0001)
