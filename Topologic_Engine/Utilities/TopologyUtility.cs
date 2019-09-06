@@ -50,21 +50,41 @@ namespace BH.Engine.Topologic
 
     public static partial class Modify
     {
-        public static global::Topologic.Topology Translate(global::Topologic.Topology topology, double x, double y, double z)
+        public static global::Topologic.Topology Translate(global::Topologic.Topology topology, double x = 0.0, double y = 0.0, double z = 0.0)
         {
             return global::Topologic.Utilities.TopologyUtility.Translate(topology,x, y, z);
         }
 
         public static global::Topologic.Topology Rotate(global::Topologic.Topology topology, global::Topologic.Vertex origin,
-                double xVector, double yVector, double zVector,
-                double degree)
+                double xVector = 0.0, double yVector = 0.0, double zVector = 0.0,
+                double degree = 0.0)
         {
             return global::Topologic.Utilities.TopologyUtility.Rotate(topology, origin, xVector, yVector, zVector, degree);
         }
 
-        public static global::Topologic.Topology Scale(global::Topologic.Topology topology, global::Topologic.Vertex origin, double xFactor, double yFactor, double zFactor)
+        public static global::Topologic.Topology Scale(global::Topologic.Topology topology, global::Topologic.Vertex origin, double xFactor = 1.0, double yFactor = 1.0, double zFactor = 1.0)
         {
             return global::Topologic.Utilities.TopologyUtility.Scale(topology, origin, xFactor, yFactor, zFactor);
+        }
+
+        public static List<global::Topologic.Topology> AdjacentTopologies(global::Topologic.Topology topology, global::Topologic.Topology parentTopology, int topologyType)
+        {
+            return global::Topologic.Utilities.TopologyUtility.AdjacentTopologies(topology, parentTopology, topologyType);
+        }
+
+        public static List<global::Topologic.Edge> AdjacentEdges(global::Topologic.Topology topology, global::Topologic.Topology parentTopology)
+        {
+            return global::Topologic.Utilities.TopologyUtility.AdjacentEdges(topology, parentTopology);
+        }
+
+        public static List<global::Topologic.Face> AdjacentFaces(global::Topologic.Topology topology, global::Topologic.Topology parentTopology)
+        {
+            return global::Topologic.Utilities.TopologyUtility.AdjacentFaces(topology, parentTopology);
+        }
+
+        public static List<global::Topologic.Cell> AdjacentCells(global::Topologic.Topology topology, global::Topologic.Topology parentTopology)
+        {
+            return global::Topologic.Utilities.TopologyUtility.AdjacentCells(topology, parentTopology);
         }
     }
 }
