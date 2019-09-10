@@ -59,6 +59,16 @@ namespace BH.Engine.Topologic
         {
             return global::Topologic.Utilities.FaceUtility.VertexAtParameters(face, u, v);
         }
+
+        public static List<global::Topologic.Shell> AdjacentShells(global::Topologic.Face face, global::Topologic.Topology parentTopology)
+        {
+            return global::Topologic.Utilities.FaceUtility.AdjacentShells(face, parentTopology);
+        }
+
+        public static List<global::Topologic.Cell> AdjacentCells(global::Topologic.Face face, global::Topologic.Topology parentTopology)
+        {
+            return global::Topologic.Utilities.FaceUtility.AdjacentCells(face, parentTopology);
+        }
     }
 
     public static partial class Modify

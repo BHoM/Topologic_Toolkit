@@ -30,38 +30,16 @@ using Topologic.Utilities;
 
 namespace BH.Engine.Topologic
 {
-    public static partial class Create
-    {
-        public static global::Topologic.Edge EdgeByVertices(IEnumerable<global::Topologic.Vertex> vertices)
-        {
-            return global::Topologic.Utilities.EdgeUtility.ByVertices(vertices);
-        }
-
-        public static global::Topologic.Edge EdgeByCircle(global::Topologic.Vertex centerPoint, double radius,
-                double xAxisX, double xAxisY, double xAxisZ,
-                double normalX, double normalY, double normalZ)
-        {
-            return global::Topologic.Utilities.EdgeUtility.ByCircle(centerPoint, radius, xAxisX, xAxisY, xAxisZ, normalX, normalY, normalZ);
-        }
-    }
-
     public static partial class Query
     {
-        public static double ParameterAtVertex(global::Topologic.Edge edge, global::Topologic.Vertex vertex)
+        public static List<global::Topologic.Shell> AdjacentShells(global::Topologic.Wire wire, global::Topologic.Topology parentTopology)
         {
-            return global::Topologic.Utilities.EdgeUtility.ParameterAtVertex(edge, vertex);
+            return global::Topologic.Utilities.WireUtility.AdjacentShells(wire, parentTopology);
         }
 
-        public static global::Topologic.Vertex VertexAtParameter(global::Topologic.Edge edge, double u)
+        public static List<global::Topologic.Cell> AdjacentCells(global::Topologic.Wire wire, global::Topologic.Topology parentTopology)
         {
-            return global::Topologic.Utilities.EdgeUtility.VertexAtParameter(edge, u);
-        }
-
-        public static List<global::Topologic.Wire> AdjacentWires(global::Topologic.Edge edge, global::Topologic.Topology parentTopology)
-        {
-            return global::Topologic.Utilities.EdgeUtility.AdjacentWires(edge, parentTopology);
+            return global::Topologic.Utilities.WireUtility.AdjacentCells(wire, parentTopology);
         }
     }
-
-
 }
