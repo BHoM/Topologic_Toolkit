@@ -69,6 +69,16 @@ namespace BH.Engine.Topologic
         {
             return global::Topologic.Utilities.FaceUtility.AdjacentCells(face, parentTopology);
         }
+
+        public static bool IsInside(global::Topologic.Face face, global::Topologic.Vertex vertex, double tolerance = 0.0001)
+        {
+            return global::Topologic.Utilities.FaceUtility.IsInside(face, vertex, tolerance);
+        }
+
+        public static global::Topologic.Vertex InternalVertex(global::Topologic.Face face, double tolerance = 0.0001)
+        {
+            return global::Topologic.Utilities.FaceUtility.InternalVertex(face, tolerance);
+        }
     }
 
     public static partial class Modify

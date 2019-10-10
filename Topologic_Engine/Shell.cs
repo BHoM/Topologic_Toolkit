@@ -129,7 +129,7 @@ namespace BH.Engine.Topologic
                 }
                 bhomControlPoints.Add(p1); // close the wire
                 Polyline bhomBoundary = new Polyline { ControlPoints = bhomControlPoints };
-                PlanarSurface bhomPlanarSurface = new PlanarSurface { ExternalBoundary = bhomBoundary, InternalBoundaries = null };
+                BH.oM.Geometry.PlanarSurface bhomPlanarSurface = new BH.oM.Geometry.PlanarSurface { ExternalBoundary = bhomBoundary, InternalBoundaries = null };
                 global::Topologic.Face face = Create.FaceByPlanarSurface(bhomPlanarSurface);
                 faces.Add(face);
             }

@@ -49,45 +49,10 @@ namespace BH.Engine.Topologic
         {
             return global::Topologic.Utilities.CellUtility.Contains(cell, vertex, allowOnBoundary, tolerance);
         }
-    }
 
-    public static partial class Compute
-    {
-        public static global::Topologic.Vertex VertexInCell(global::Topologic.Cell cell, bool allowOnBoundary = false, double tolerance = 0.0001)
+        public static global::Topologic.Vertex InternalVertex(global::Topologic.Cell cell, double tolerance = 0.0001)
         {
-            // Get all vertices
-            List<global::Topologic.Vertex> vertices = cell.Vertices;
-            if (vertices.Count == 0)
-            {
-                return null;
-            }
-
-            // If centroid is inside, use it
-            global::Topologic.Vertex cellCenterOfMass = cell.CenterOfMass;
-            if (CellUtility.Contains(cell, cellCenterOfMass, allowOnBoundary, tolerance))
-            {
-                return cellCenterOfMass;
-            }
-
-            // Get the first vertex
-            global::Topologic.Vertex firstVertex = vertices[0];
-
-            foreach (global::Topologic.Vertex anotherVertex in vertices)
-            {
-                if (anotherVertex.IsSame(firstVertex))
-                {
-                    continue;
-                }
-
-                global::Topologic.Edge edge = global::Topologic.Edge.ByStartVertexEndVertex(firstVertex, anotherVertex);
-                global::Topologic.Vertex edgeCenterOfMass = edge.CenterOfMass;
-                if (CellUtility.Contains(cell, edgeCenterOfMass, allowOnBoundary, tolerance))
-                {
-                    return edgeCenterOfMass;
-                }
-            }
-
-            return null;
+            return global::Topologic.Utilities.CellUtility.InternalVertex(cell, tolerance);
         }
     }
 }

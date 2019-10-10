@@ -37,9 +37,11 @@ namespace BH.Engine.Topologic
             bool viaSharedTopologies = false,
             bool viaSharedApertures = false,
             bool toExteriorTopologies = false,
-            bool toExteriorApertures = false)
+            bool toExteriorApertures = false,
+            bool useFaceInternalVertex = false,
+            double tolerance = 0.0001)
         {
-            return global::Topologic.Graph.ByTopology(topology, direct, viaSharedTopologies, viaSharedApertures, toExteriorTopologies, toExteriorApertures);
+            return global::Topologic.Graph.ByTopology(topology, direct, viaSharedTopologies, viaSharedApertures, toExteriorTopologies, toExteriorApertures, useFaceInternalVertex, tolerance);
         }
     }
 

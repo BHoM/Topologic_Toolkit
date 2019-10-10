@@ -350,7 +350,10 @@ namespace BH.Engine.Topologic
             return topology.Dictionary;
         }
 
-
+        public static List<global::Topologic.Topology> SharedTopologies(global::Topologic.Topology topology, global::Topologic.Topology anotherTopology, int typeFilter = 255)
+        {
+            return topology.SharedTopologies(anotherTopology, typeFilter);
+        }
     }
 
     public static partial class Modify

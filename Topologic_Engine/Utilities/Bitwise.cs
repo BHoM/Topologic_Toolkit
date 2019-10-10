@@ -32,27 +32,27 @@ namespace BH.Engine.Topologic
 {
     public static partial class Compute
     {
-        public static int And(List<int> arguments)
+        public static int AND(List<int> arguments)
         {
-            return global::Topologic.Utilities.Bitwise.And(arguments);
+            return global::Topologic.Utilities.Bitwise.AND(arguments);
         }
 
 
-        public static int Or(List<int> arguments)
+        public static int OR(List<int> arguments)
         {
-            return global::Topologic.Utilities.Bitwise.Or(arguments);
+            return global::Topologic.Utilities.Bitwise.OR(arguments);
         }
 
 
-        public static int Xor(List<int> arguments)
+        public static int XOR(List<int> arguments)
         {
-            return global::Topologic.Utilities.Bitwise.Xor(arguments);
+            return global::Topologic.Utilities.Bitwise.XOR(arguments);
         }
 
 
-        public static int Not(int argument)
+        public static int NOT(int argument)
         {
-            return global::Topologic.Utilities.Bitwise.Not(argument);
+            return global::Topologic.Utilities.Bitwise.NOT(argument);
         }
     }
 }
