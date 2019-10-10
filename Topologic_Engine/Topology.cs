@@ -354,6 +354,16 @@ namespace BH.Engine.Topologic
         {
             return topology.SharedTopologies(anotherTopology, typeFilter);
         }
+
+        public static global::Topologic.Vertex CenterOfMass(global::Topologic.Topology topology)
+        {
+            return topology.CenterOfMass;
+        }
+
+        public static global::Topologic.Vertex Centroid(global::Topologic.Topology topology)
+        {
+            return topology.Centroid;
+        }
     }
 
     public static partial class Modify
@@ -361,6 +371,11 @@ namespace BH.Engine.Topologic
         public static global::Topologic.Topology AddContents(global::Topologic.Topology topology, List<global::Topologic.Topology> contents, int typeFilter = 0)
         {
             return topology.AddContents(contents, typeFilter);
+        }
+
+        public static global::Topologic.Topology RemoveContents(global::Topologic.Topology topology, List<global::Topologic.Topology> contentTopologies)
+        {
+            return topology.RemoveContents(contentTopologies);
         }
 
         public static global::Topologic.Topology AddApertures(global::Topologic.Topology topology, IEnumerable<global::Topologic.Topology> apertureTopologies)
@@ -374,6 +389,10 @@ namespace BH.Engine.Topologic
             return topology.SetDictionary(dictionary);
         }
 
+        public static global::Topologic.Topology SetDictionaries(global::Topologic.Topology topology, List<global::Topologic.Vertex> selectors, List<Dictionary<String, Object>> dictionaries, int typeFilter = 255)
+        {
+            return topology.SetDictionaries(selectors, dictionaries, typeFilter);
+        }
     }
 
     public static partial class Compute
