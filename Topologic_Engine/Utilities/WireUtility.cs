@@ -41,5 +41,10 @@ namespace BH.Engine.Topologic
         {
             return global::Topologic.Utilities.WireUtility.AdjacentCells(wire, parentTopology);
         }
+        
+        public static global::Topologic.Wire RemoveCollinearEdges(global::Topologic.Wire wire, double tolerance = 0.0001)
+        {
+            return global::Topologic.Utilities.WireUtility.RemoveCollinearEdges(wire, tolerance);
+        }
     }
 }

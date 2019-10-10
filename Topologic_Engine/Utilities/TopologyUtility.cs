@@ -32,16 +32,6 @@ namespace BH.Engine.Topologic
 {
     public static partial class Query
     {
-        public static global::Topologic.Vertex CenterOfMass(global::Topologic.Topology topology)
-        {
-            return topology.CenterOfMass;
-        }
-
-        public static global::Topologic.Vertex Centroid(global::Topologic.Topology topology)
-        {
-            return topology.Centroid;
-        }
-
         public static List<global::Topologic.Topology> AdjacentTopologies(global::Topologic.Topology topology, global::Topologic.Topology parentTopology, int typeFilter)
         {
             return global::Topologic.Utilities.TopologyUtility.AdjacentTopologies(topology, parentTopology, typeFilter);
