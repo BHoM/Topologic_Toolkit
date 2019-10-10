@@ -36,5 +36,10 @@ namespace BH.Engine.Topologic
         {
             return global::Topologic.Utilities.VertexUtility.AdjacentEdges(vertex, parentTopology);
         }
+
+        public static double Distance(global::Topologic.Vertex vertex, global::Topologic.Topology otherTopology)
+        {
+            return global::Topologic.Utilities.VertexUtility.Distance(vertex, otherTopology);
+        }
     }
 }

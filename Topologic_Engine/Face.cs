@@ -39,7 +39,7 @@ namespace BH.Engine.Topologic
             return PlanarSurface(face);
         }
 
-        internal static PlanarSurface PlanarSurface(global::Topologic.Face face)
+        internal static BH.oM.Geometry.PlanarSurface PlanarSurface(global::Topologic.Face face)
         {
             Polyline bhomExternalBoundary = Convert.Polyline(face.ExternalBoundary);
             List<ICurve> bhomInternalBoundaries = new List<ICurve>();
@@ -48,7 +48,7 @@ namespace BH.Engine.Topologic
             {
                 bhomInternalBoundaries.Add(Convert.Polyline(internalBoundary));
             }
-            PlanarSurface planarSurface = new PlanarSurface { ExternalBoundary = bhomExternalBoundary, InternalBoundaries = bhomInternalBoundaries };
+            BH.oM.Geometry.PlanarSurface planarSurface = new BH.oM.Geometry.PlanarSurface { ExternalBoundary = bhomExternalBoundary, InternalBoundaries = bhomInternalBoundaries };
             return planarSurface;
         }
     }
@@ -139,7 +139,7 @@ namespace BH.Engine.Topologic
             throw new NotImplementedException("This type of BHoM surface is not yet supported.");
         }
 
-        internal static global::Topologic.Face FaceByPlanarSurface(PlanarSurface bhomPlanarSurface)
+        internal static global::Topologic.Face FaceByPlanarSurface(BH.oM.Geometry.PlanarSurface bhomPlanarSurface)
         {
             ICurve bhomExternalBoundary = bhomPlanarSurface.ExternalBoundary;
             List<ICurve> bhomInternalBoundaries = bhomPlanarSurface.InternalBoundaries;

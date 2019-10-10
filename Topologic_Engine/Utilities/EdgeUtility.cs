@@ -62,6 +62,4 @@ namespace BH.Engine.Topologic
             return global::Topologic.Utilities.EdgeUtility.AdjacentWires(edge, parentTopology);
         }
     }
-
-
 }

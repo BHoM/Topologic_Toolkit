@@ -32,11 +32,6 @@ namespace BH.Engine.Topologic
 {
     public static partial class Query
     {
-        public static double Distance(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
-        {
-            return global::Topologic.Utilities.TopologyUtility.Distance(topology,otherTopology);
-        }
-
         public static global::Topologic.Vertex CenterOfMass(global::Topologic.Topology topology)
         {
             return topology.CenterOfMass;
