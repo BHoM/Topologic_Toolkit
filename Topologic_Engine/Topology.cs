@@ -260,7 +260,7 @@ namespace BH.Engine.Topologic
 
     public static partial class Query
     {
-        public static global::Topologic.Topology SelectSubtopology(global::Topologic.Topology topology, global::Topologic.Topology selector, int typeFilter)
+        public static global::Topologic.Topology SelectSubtopology(global::Topologic.Topology topology, global::Topologic.Vertex selector, int typeFilter)
         {
             return topology.SelectSubtopology(selector, typeFilter);
         }
