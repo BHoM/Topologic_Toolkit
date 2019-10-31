@@ -57,9 +57,9 @@ namespace BH.Engine.Topologic
             return graph.IsolatedVertices;
         }
 
-        public static List<global::Topologic.Edge> Edges(global::Topologic.Graph graph)
+        public static List<global::Topologic.Edge> Edges(global::Topologic.Graph graph, List<global::Topologic.Vertex> vertices, double tolerance = 0.0001)
         {
-            return graph.Edges;
+            return graph.Edges(vertices, tolerance);
         }
 
         public static global::Topologic.Topology Topology(global::Topologic.Graph graph)
@@ -123,16 +123,10 @@ namespace BH.Engine.Topologic
             return graph.Diameter;
         }
 
-        public static global::Topologic.Edge EdgeAtVertices(global::Topologic.Graph graph, global::Topologic.Vertex vertex1, global::Topologic.Vertex vertex2,
+        public static global::Topologic.Edge Edge(global::Topologic.Graph graph, global::Topologic.Vertex vertex1, global::Topologic.Vertex vertex2,
 			double tolerance = 0.0001)
         {
-            return graph.EdgeAtVertices(vertex1, vertex2, tolerance);
-        }
-
-        public static List<global::Topologic.Edge> IncidentEdges(global::Topologic.Graph graph, global::Topologic.Vertex vertex,
-            double tolerance = 0.0001)
-        {
-            return graph.IncidentEdges(vertex, tolerance);
+            return graph.Edge(vertex1, vertex2, tolerance);
         }
     }
 
@@ -186,9 +180,9 @@ namespace BH.Engine.Topologic
             return graph.ShortestPaths(startVertex, endVertex, vertexKey, edgeKey, timeLimitinSeconds);
         }
 
-        public static int Distance(global::Topologic.Graph graph, global::Topologic.Vertex startVertex, global::Topologic.Vertex endVertex)
+        public static int TopologicalDistance(global::Topologic.Graph graph, global::Topologic.Vertex startVertex, global::Topologic.Vertex endVertex)
         {
-            return graph.Distance(startVertex, endVertex);
+            return graph.TopologicalDistance(startVertex, endVertex);
         }
 
         public static bool IsErdoesGallai(global::Topologic.Graph graph, List<int> sequence)

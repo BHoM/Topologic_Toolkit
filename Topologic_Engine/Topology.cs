@@ -34,36 +34,10 @@ namespace BH.Engine.Topologic
 
     public static partial class Convert
     {
-        //public static List<IGeometry> Geometry(global::Topologic.Topology topology)
         public static IGeometry Geometry(global::Topologic.Topology topology)
         {
-            //return null;
             return BasicGeometry(topology); // will this do?
-            //List<IGeometry> output = new List<IGeometry>();
-            //topology.RecursiveGeometry(ref output);
-            //return output;
         }
-
-        //internal static void RecursiveGeometry(global::Topologic.Topology topology, ref List<IGeometry> output)
-        //{
-        //    List<IGeometry> objects = new List<IGeometry>();
-        //    objects.Add(BasicGeometry(topology));
-
-        //    List<global::Topologic.Topology> subContents = topology.SubContents;
-        //    List<IGeometry> subContentGeometries = new List<IGeometry>();
-        //    foreach(global::Topologic.Topology subContent in subContents)
-        //    {
-        //        List<Object> dynamoThisGeometries = new List<Object>();
-        //        RecursiveGeometry(subContent, ref subContentGeometries);
-        //    }
-
-        //    if (subContentGeometries.Count > 0)
-        //    {
-        //        objects.Add(subContentGeometries);
-        //    }
-
-        //    output.Add(objects);
-        //}
 
         internal static IGeometry BasicGeometry(global::Topologic.Topology topology)
         {
