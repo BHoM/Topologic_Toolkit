@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is part of the Buildings and Habitats object Model (BHoM)
  * Copyright (c) 2015 - 2019, the respective contributors. All rights reserved.
  *
@@ -371,9 +371,9 @@ namespace BH.Engine.Topologic
 
     public static partial class Compute
     {
-        public static global::Topologic.Topology Difference(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Difference(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null, bool transferDictionary = false)
         {
-            return topology.Difference(otherTopology);
+            return topology.Difference(otherTopology, transferDictionary);
         }
 
         public static List<global::Topologic.Topology> Filter(List<global::Topologic.Topology> topologies, int typeFilter)
@@ -381,24 +381,24 @@ namespace BH.Engine.Topologic
             return global::Topologic.Topology.Filter(topologies, typeFilter);
         }
 
-        public static global::Topologic.Topology Impose(global::Topologic.Topology topology, global::Topologic.Topology tool)
+        public static global::Topologic.Topology Impose(global::Topologic.Topology topology, global::Topologic.Topology tool = null, bool transferDictionary = false)
         {
-            return topology.Impose(tool);
+            return topology.Impose(tool, transferDictionary);
         }
 
-        public static global::Topologic.Topology Imprint(global::Topologic.Topology topology, global::Topologic.Topology tool)
+        public static global::Topologic.Topology Imprint(global::Topologic.Topology topology, global::Topologic.Topology tool = null, bool transferDictionary = false)
         {
-            return topology.Imprint(tool);
+            return topology.Imprint(tool, transferDictionary);
         }
 
-        public static global::Topologic.Topology Intersect(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Intersect(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null, bool transferDictionary = false)
         {
-            return topology.Intersect(otherTopology);
+            return topology.Intersect(otherTopology, transferDictionary);
         }
 
-        public static global::Topologic.Topology Merge(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Merge(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null, , bool transferDictionary = false)
         {
-            return topology.Merge(otherTopology);
+            return topology.Merge(otherTopology, transferDictionary);
         }
 
         public static global::Topologic.Topology SelfMerge(global::Topologic.Topology topology)
@@ -406,22 +406,22 @@ namespace BH.Engine.Topologic
             return topology.SelfMerge();
         }
 
-        public static global::Topologic.Topology Slice(global::Topologic.Topology topology, global::Topologic.Topology tool)
+        public static global::Topologic.Topology Slice(global::Topologic.Topology topology, global::Topologic.Topology tool = null, bool transferDictionary = false)
         {
-            return topology.Slice(tool);
+            return topology.Slice(tool, transferDictionary);
         }
 
-        public static global::Topologic.Topology Divide(global::Topologic.Topology topology, global::Topologic.Topology tool)
+        public static global::Topologic.Topology Divide(global::Topologic.Topology topology, global::Topologic.Topology tool = null, , bool transferDictionary = false)
         {
-            return topology.Divide(tool);
+            return topology.Divide(tool, transferDictionary);
         }
 
-        public static global::Topologic.Topology Union(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology Union(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null)
         {
             return topology.Union(otherTopology);
         }
 
-        public static global::Topologic.Topology XOR(global::Topologic.Topology topology, global::Topologic.Topology otherTopology)
+        public static global::Topologic.Topology XOR(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null)
         {
             return topology.XOR(otherTopology);
         }
@@ -435,6 +435,5 @@ namespace BH.Engine.Topologic
         {
             return topology.ShallowCopy();
         }
-
     }
 }
