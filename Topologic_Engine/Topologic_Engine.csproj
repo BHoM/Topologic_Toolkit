@@ -65,7 +65,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TopologicNET, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Build\TopologicNET.dll</HintPath>
+      <HintPath>..\libs\TopologicNET.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
