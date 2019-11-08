@@ -3,7 +3,7 @@
 <img src="https://github.com/BHoM/documentation/blob/master/wiki/images/Topologic_Toolkit/Logo.png" height= 150>   
 
 ## Welcome to Topologic_Toolkit
-Topologic is a software modelling library enabling hierarchical and topological representations of architectural spaces, buildings and artefacts through non-manifold topology (NMT). Topologic is designed as a core library and additional plugins to visual data flow programming (VDFP) applications and parametric modelling platforms commonly used in architectural design practice. These applications provide workspaces with visual programming nodes and connections for architects to interact with Topologic and perform architectural design and analysis tasks.
+[Topologic](https://topologic.app) is a software modelling library enabling hierarchical and topological representations of architectural spaces, buildings and artefacts through non-manifold topology (NMT). Topologic is designed as a core library and additional plugins to visual data flow programming (VDFP) applications and parametric modelling platforms commonly used in architectural design practice. These applications provide workspaces with visual programming nodes and connections for architects to interact with Topologic and perform architectural design and analysis tasks.
 
 # BHoM
 
@@ -54,7 +54,7 @@ You are good to go!
 
 ## Topologic_Toolkit :sparkling_heart:
 
-[Topologic_Toolkit] (https://topologic.app/software/) is all about generating waterthight spaces. The most versatile :sparkles: method of controlling model qulaity!
+[Topologic_Toolkit](https://topologic.app/software/) is all about generating waterthight spaces. The most versatile :sparkles: method of controlling model qulaity!
 
 To find out more about Topologic_Toolkit and get started, **see guidance on the [Topologic_Toolkit Wiki](https://github.com/BHoM/Topologic_Toolkit/wiki) page.**   
 ...regardless if you are MEP engineer, Energy modeler, Building Physicist,  Grasshopper, DynamoBIM or Excel user.
