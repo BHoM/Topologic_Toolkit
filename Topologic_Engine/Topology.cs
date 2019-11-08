@@ -396,7 +396,7 @@ namespace BH.Engine.Topologic
             return topology.Intersect(otherTopology, transferDictionary);
         }
 
-        public static global::Topologic.Topology Merge(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null, , bool transferDictionary = false)
+        public static global::Topologic.Topology Merge(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null, bool transferDictionary = false)
         {
             return topology.Merge(otherTopology, transferDictionary);
         }
@@ -411,19 +411,19 @@ namespace BH.Engine.Topologic
             return topology.Slice(tool, transferDictionary);
         }
 
-        public static global::Topologic.Topology Divide(global::Topologic.Topology topology, global::Topologic.Topology tool = null, , bool transferDictionary = false)
+        public static global::Topologic.Topology Divide(global::Topologic.Topology topology, global::Topologic.Topology tool = null, bool transferDictionary = false)
         {
             return topology.Divide(tool, transferDictionary);
         }
 
-        public static global::Topologic.Topology Union(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null)
+        public static global::Topologic.Topology Union(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null, bool transferDictionary = false)
         {
-            return topology.Union(otherTopology);
+            return topology.Union(otherTopology, transferDictionary);
         }
 
-        public static global::Topologic.Topology XOR(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null)
+        public static global::Topologic.Topology XOR(global::Topologic.Topology topology, global::Topologic.Topology otherTopology = null, bool transferDictionary = false)
         {
-            return topology.XOR(otherTopology);
+            return topology.XOR(otherTopology, transferDictionary);
         }
 
         public static bool ExportToBRep(global::Topologic.Topology topology, String path)
