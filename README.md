@@ -60,12 +60,12 @@ To find out more about Topologic_Toolkit and get started, **see guidance on the 
 ...regardless if you are MEP engineer, Energy modeler, Building Physicist,  Grasshopper, DynamoBIM or Excel user.
 
 ### :clap: Topologic_Toolkit Credits: ### 
-Wassim Jabi
-Robert Aish
-Simon Lannon
-Aikaterini Chatzivasileiadi
-Nicholas Wardhana
-Michal Dengusiak
+Wassim Jabi  
+Robert Aish  
+Simon Lannon  
+Aikaterini Chatzivasileiadi  
+Nicholas Wardhana  
+Michal Dengusiak  
 
 
 ## Want to contribute? ##
