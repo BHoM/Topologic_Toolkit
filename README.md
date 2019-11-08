@@ -54,7 +54,7 @@ You are good to go!
 
 ## Topologic_Toolkit :sparkling_heart:
 
-[Topologic_Toolkit](https://topologic.app/software/) is all about generating waterthight spaces. The most versatile :sparkles: method of controlling model qulaity!
+[Topologic_Toolkit](https://topologic.app/software/) is all about generating waterthight spaces. The most versatile :sparkles: method of controlling model quality!
 
 To find out more about Topologic_Toolkit and get started, **see guidance on the [Topologic_Toolkit Wiki](https://github.com/BHoM/Topologic_Toolkit/wiki) page.**   
 ...regardless if you are MEP engineer, Energy modeler, Building Physicist,  Grasshopper, DynamoBIM or Excel user.
