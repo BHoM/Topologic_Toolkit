@@ -34,30 +34,36 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BHoM">
-      <HintPath>..\..\BHoM\Build\BHoM.dll</HintPath>
+      <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Dimensional_oM">
-      <HintPath>..\..\BHoM\Build\Dimensional_oM.dll</HintPath>
+      <HintPath>C:\ProgramData\BHoM\Assemblies\Dimensional_oM.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Environment_Engine">
-      <HintPath>..\..\BHoM_Engine\Build\Environment_Engine.dll</HintPath>
+      <HintPath>C:\ProgramData\BHoM\Assemblies\Environment_Engine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Environment_oM">
-      <HintPath>..\..\BHoM\Build\Environment_oM.dll</HintPath>
+      <HintPath>C:\ProgramData\BHoM\Assemblies\Environment_oM.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Geometry_Engine">
-      <HintPath>..\..\BHoM_Engine\Build\Geometry_Engine.dll</HintPath>
+      <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_Engine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Geometry_oM">
-      <HintPath>..\..\BHoM\Build\Geometry_oM.dll</HintPath>
+      <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_oM.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Bson.2.7.0\lib\net45\MongoDB.Bson.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serialiser_Engine">
-      <HintPath>..\..\BHoM_Engine\Build\Serialiser_Engine.dll</HintPath>
+      <HintPath>C:\ProgramData\BHoM\Assemblies\Serialiser_Engine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -101,8 +107,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>Copy /Y "$(SolutionDir)libs\TopologicCore.dll" "$(SolutionDir)Build\TopologicCore.dll"
-Copy /Y "$(SolutionDir)libs\TK*.dll" "$(SolutionDir)Build\TK*.dll"</PostBuildEvent>
+    <PostBuildEvent>
+xcopy "$(TargetDir)$(TargetFileName)"  "C:\ProgramData\BHoM\Assemblies" /Y
+Copy /Y "$(SolutionDir)libs\TopologicCore.dll" "C:\ProgramData\BHoM\Assemblies\TopologicCore.dll"
+Copy /Y "$(SolutionDir)libs\TK*.dll" "C:\ProgramData\BHoM\Assemblies\TK*.dll"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
