@@ -48,7 +48,7 @@ namespace BH.Engine.Topologic
             {
                 bhomInternalBoundaries.Add(Convert.Polyline(internalBoundary));
             }
-            BH.oM.Geometry.PlanarSurface planarSurface = new BH.oM.Geometry.PlanarSurface { ExternalBoundary = bhomExternalBoundary, InternalBoundaries = bhomInternalBoundaries };
+            BH.oM.Geometry.PlanarSurface planarSurface = new BH.oM.Geometry.PlanarSurface(bhomExternalBoundary, bhomInternalBoundaries);
             return planarSurface;
         }
     }
