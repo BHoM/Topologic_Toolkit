@@ -7,7 +7,7 @@
 
 # BHoM
 
-A great place to start with BHoM is reading our Wiki [here](https://github.com/BHoM/documentation/wiki) including pages like the [Structure of the BHoM](https://github.com/BHoM/documentation/wiki/Structure-of-the-BHoM) and [Using the BHoM](https://github.com/BHoM/documentation/wiki/Using-the-BHoM).
+A great place to start with BHoM is reading our Wiki [here](https://github.com/BHoM/documentation/wiki) including pages like the [Structure of the BHoM](https://bhom.xyz/documentation/Basics/Coding%20fundamentals/The-BHoM-code-organisation/) and [Using the BHoM](https://bhom.xyz/documentation/Basics/Using-the-BHoM/).
 
 ## Quick start ##
 
@@ -70,11 +70,11 @@ Michal Dengusiak
 
 ## Want to contribute? ##
 
-BHoM is an open-source project and would be nothing without its community. Take a look at our contributing guidelines and tips for BHoM [here](https://github.com/BHoM/BHoM/blob/master/CONTRIBUTING.md) for Topologic [here](https://github.com/NonManifoldTopology/Topologic) .
+BHoM is an open-source project and would be nothing without its community. Take a look at our contributing guidelines and tips for BHoM [here](https://github.com/BHoM/BHoM/blob/main/CONTRIBUTING.md) for Topologic [here](https://github.com/NonManifoldTopology/Topologic) .
 
 ## Licence ##
 
 BHoM is free software licenced under GNU Lesser General Public Licence - [https://www.gnu.org/licenses/lgpl-3.0.html](https://www.gnu.org/licenses/lgpl-3.0.html)  
 Each contributor holds copyright over their respective contributions.
 The project versioning (Git) records all such contribution source information.
-See [LICENSE](https://github.com/BHoM/BHoM/blob/master/LICENSE) and [COPYRIGHT_HEADER](https://github.com/BHoM/BHoM/blob/master/COPYRIGHT_HEADER.txt).
+See [LICENSE](https://github.com/BHoM/BHoM/blob/main/LICENSE) and [COPYRIGHT_HEADER](https://github.com/BHoM/BHoM/blob/main/COPYRIGHT_HEADER.txt).
